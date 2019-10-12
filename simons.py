@@ -121,13 +121,50 @@ counts = result.get_counts(simonCircuit)
 #plot_histogram(counts)
 #print(counts)
 
-## post processing via guassian elimintation classically ##
 
 print("\nSimulated Probabilities")
 print("==========================\n")
+print("Simulated Runs:",shots,"\n")
 
 for key, val in counts.items():
         prob = val / shots
         print("Period:", key, ", Counts:", val, ", Probability:", prob)
 
+print("")
+
+# Classical post processing via Guassian elimination for the linear equations
+# Y a = 0
+# k[::-1], we reverse the order of the bitstring
+
+lAnswer = [ (k[::-1],v) for k,v in counts.items() if k != "0"*n ]
+
+# Sort basis by probabilities
+lAnswer.sort(key = lambda x: x[1], reverse=True)
+
+Y = []
+for k, v in lAnswer:
+        Y.append( [ int(c) for c in k ] )
+
+Y = Matrix(Y)
+
+Y_transformed = Y.rref(iszerofunc=lambda x: x % 2==0)
+
+# convert rational and negatives in rref
+def mod(x,modulus):
+        numer,denom = x.as_numer_denom()
+        return numer*mod_inverse(denom,modulus) % modulus
+
+# Deal with negative and fractial values
+Y_new = Y_transformed[0].applyfunc(lambda x: mod(x,2))
+
+print("The hidden period a_0, a_1 ... a_",n-1, "only satisfies these equations:")
+print("===================================================================\n")
+rows,cols = Y_new.shape
+for r in range(rows):
+        Yr = [ "s_"+str(i)+"" for i,v in enumerate(list(Y_new[r,:])) if v==1]
+        if len(Yr) > 0:
+                tStr = " + ".join(Yr)
+                print(tStr, "= 0") 
+
+# Nicer / Cleaner way to display what strings satisfy from our list
 print("")
