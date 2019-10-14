@@ -3,10 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute,Aer 
-
 from qiskit.tools.visualization import plot_histogram
 from qiskit.tools.visualization import circuit_drawer
-
 from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
 
 # 2 qubits
@@ -23,9 +21,9 @@ from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
 # 11 xor f(11) = 00
 #
 
-# hidden period 'a'
-a = "0110"
-n = len(a)
+# hidden string
+s = "010101"
+n = len(s)
 
 
 # Create registers
@@ -57,21 +55,23 @@ for i in range(n):
 # get the small index j such it's "1"
 j = -1
 #reverse the string so that it takes
-a = a[::-1]
-for i, c in enumerate(a):
+s = s[::-1]
+for i, c in enumerate(s):
 	if c == "1":
 		j = i
 		break
 		
 # 1-1 and 2-1 mapping with jth qubit 
 # x is control to xor 2nd qubit with a
-for i, c in enumerate(a):
+for i, c in enumerate(s):
     if c == "1" and j >= 0:
         #simonCircuit.x(qr[j])
         simonCircuit.cx(qr[j], qr[n+i]) #the i-th qubit is flipped if s_i is 1
         #simonCircuit.x(qr[j])
 
 # Random peemutation
+# This part is how we can get by with 1 query of the oracle and better
+# simulates quantum behavior we'd expect
 perm = list(np.random.permutation(n))
 
 # init position
@@ -122,8 +122,8 @@ counts = result.get_counts(simonCircuit)
 #print(counts)
 
 
-print("\nSimulated Probabilities")
-print("==========================\n")
+print("\nSimulation: Resulting Values and Probabilities")
+print("===============================================\n")
 print("Simulated Runs:",shots,"\n")
 
 for key, val in counts.items():
@@ -157,14 +157,32 @@ def mod(x,modulus):
 # Deal with negative and fractial values
 Y_new = Y_transformed[0].applyfunc(lambda x: mod(x,2))
 
-print("The hidden period a_0, a_1 ... a_",n-1, "only satisfies these equations:")
-print("===================================================================\n")
+print("The hidden period a0, a1 ... a%d only satisfies these equations:" %(n-1))
+print("===============================================================\n")
 rows,cols = Y_new.shape
 for r in range(rows):
-        Yr = [ "s_"+str(i)+"" for i,v in enumerate(list(Y_new[r,:])) if v==1]
+        Yr = [ "a"+str(i)+"" for i,v in enumerate(list(Y_new[r,:])) if v==1]
         if len(Yr) > 0:
                 tStr = " + ".join(Yr)
                 print(tStr, "= 0") 
 
-# Nicer / Cleaner way to display what strings satisfy from our list
+# Now we need to solve this system of equations to get our period string
 print("")
+# a0, a2, a4
+# _0_0_0
+# 000000
+# 010101
+#        #xor
+# 000000
+# 010101
+
+# Now once we have our found string, we need to double-check by XOR back to the
+# y value
+
+
+
+# Real Devices
+
+#print("\nReal Device <device>: Resulting Values and Probabilities")
+#print("===============================================\n")
+#print("Simulated Runs:",shots,"\n")
