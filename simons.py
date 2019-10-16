@@ -2,7 +2,7 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 
-from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute,Aer 
+from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute,Aer, IBMQ
 from qiskit.tools.visualization import plot_histogram
 from qiskit.tools.visualization import circuit_drawer
 from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
@@ -22,7 +22,7 @@ from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
 #
 
 # hidden string
-s = "010101"
+s = "1111"
 n = len(s)
 
 
@@ -163,26 +163,48 @@ rows,cols = Y_new.shape
 for r in range(rows):
         Yr = [ "a"+str(i)+"" for i,v in enumerate(list(Y_new[r,:])) if v==1]
         if len(Yr) > 0:
-                tStr = " + ".join(Yr)
+                #tStr = " + ".join(Yr)
+                tStr = " mod2 ".join(Yr)
+                #tStr = u' \2295 '.join(Yr)
                 print(tStr, "= 0") 
 
 # Now we need to solve this system of equations to get our period string
 print("")
-# a0, a2, a4
-# _0_0_0
-# 000000
-# 010101
-#        #xor
-# 000000
-# 010101
+
 
 # Now once we have our found string, we need to double-check by XOR back to the
 # y value
+# Look into nullspaces with numpy
 
+
+# Simulated with noise
+# noise parameter
 
 
 # Real Devices
+'''
+[<IBMQSimulator('ibmq_qasm_simulator') 
+<IBMQBackend('ibmqx2') 
+<IBMQBackend('ibmq_16_melbourne') 
+<IBMQBackend('ibmq_vigo') f
+<IBMQBackend('ibmq_ourense') 
+'''
+
+IBMQ.load_account()
+qprovider = IBMQ.get_provider(hub='ibm-q')
+qbackend = provider.getbackend('ibmqx2')
+
+job = execute(simonCircuit,qbackend,shots=100)
+qresults = job.results()
+qcounts = qresults.get_counts()
+print(qcounts.items())
 
 #print("\nReal Device <device>: Resulting Values and Probabilities")
 #print("===============================================\n")
 #print("Simulated Runs:",shots,"\n")
+
+for key, val in qcounts.items():
+       prob = val / shots
+       print("Period:", key, ", Counts:", val, ", Probability:", prob)
+
+print("")
