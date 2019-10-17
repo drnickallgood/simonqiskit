@@ -1,6 +1,7 @@
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
+import operator
 
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute,Aer, IBMQ
 from qiskit.tools.visualization import plot_histogram
@@ -8,7 +9,7 @@ from qiskit.tools.visualization import circuit_drawer
 from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
 
 # hidden string
-s = "11"
+s = "010101"
 n = len(s)
 # Create registers
 
@@ -105,19 +106,19 @@ simonCircuit.measure(qr[0:n],cr)
 
 IBMQ.load_account()
 qprovider = IBMQ.get_provider(hub='ibm-q')
-qbackend = qprovider.get_backend('ibmqx2')
+qbackend = qprovider.get_backend('ibmq_16_melbourne')
 
+# Default for this backend seems to be 1024 ibmqx2
+qshots = 5000
 
-print("Submitting to IBM Q...\n")
-job = execute(simonCircuit,qbackend)
+job = execute(simonCircuit,backend=qbackend, shots=qshots)
 qresults = job.result()
 qcounts = qresults.get_counts()
 #print("Getting Results...\n")
 #print(qcounts)
 #print("")
+print("Submitting to IBM Q...\n")
 
-# Default for this backend seems to be 1024 ibmqx2
-qshots = 1024
 
 print("\nIBM Q Backend %s: Resulting Values and Probabilities" % qbackend)
 print("===============================================\n")
@@ -129,12 +130,12 @@ for key, val in qcounts.items():
        
 print("")
 
-''' 
+
 # Classical post processing via Guassian elimination for the linear equations
 # Y a = 0
 # k[::-1], we reverse the order of the bitstring
 
-lAnswer = [ (k[::-1],v) for k,v in counts.items() if k != "0"*n ]
+lAnswer = [ (k[::-1],v) for k,v in qcounts.items() if k != "0"*n ]
 
 # Sort basis by probabilities
 lAnswer.sort(key = lambda x: x[1], reverse=True)
@@ -168,13 +169,19 @@ for r in range(rows):
 
 # Now we need to solve this system of equations to get our period string
 print("")
-
-
+# Sort list by value
+sorted_x = sorted(qcounts.items(), key=operator.itemgetter(1), reverse=True)
+print("Sorted list of result strings by counts")
+print("======================================\n")
+for i in sorted_x:
+    print(i)
+#print(sorted_x)
+print("")
 # Now once we have our found string, we need to double-check by XOR back to the
 # y value
 # Look into nullspaces with numpy
+# Need to get x and y values based on above.. to help out
 
-'''
 
 '''
 IBM Q Backend ibmqx2: Resulting Values and Probabilities
