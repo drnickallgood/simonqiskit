@@ -9,7 +9,7 @@ from qiskit.tools.visualization import circuit_drawer
 from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
 
 # hidden string
-s = "010101"
+s = "01"
 n = len(s)
 # Create registers
 
