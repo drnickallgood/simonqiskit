@@ -9,6 +9,7 @@ device = provider.get_backend('ibmq_vigo')
 properties = device.properties()
 coupling_map = device.configuration().coupling_map
 
+
 # Generate an Aer noise model for device
 noise_model = noise.device.basic_device_noise_model(properties)
 basis_gates = noise_model.basis_gates
