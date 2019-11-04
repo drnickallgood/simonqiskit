@@ -9,7 +9,7 @@ from qiskit.tools.visualization import circuit_drawer
 from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
 
 # hidden string
-s = "01"
+s = "10"
 n = len(s)
 # Create registers
 
@@ -53,7 +53,8 @@ for i, c in enumerate(s):
         #simonCircuit.x(qr[j])
         simonCircuit.cx(qr[j], qr[n+i]) #the i-th qubit is flipped if s_i is 1
         #simonCircuit.x(qr[j])
-
+        
+        
 # Random peemutation
 # This part is how we can get by with 1 query of the oracle and better
 # simulates quantum behavior we'd expect
@@ -76,6 +77,7 @@ while i < n:
 for i in range(n):
 	if np.random.random() > 0.5:
 		simonCircuit.x(qr[n+i])
+
 
 
 simonCircuit.barrier()
@@ -106,10 +108,10 @@ simonCircuit.measure(qr[0:n],cr)
 
 IBMQ.load_account()
 qprovider = IBMQ.get_provider(hub='ibm-q')
-qbackend = qprovider.get_backend('ibmq_16_melbourne')
+qbackend = qprovider.get_backend('ibmq_vigo')
 
 # Default for this backend seems to be 1024 ibmqx2
-qshots = 5000
+qshots = 1024
 
 job = execute(simonCircuit,backend=qbackend, shots=qshots)
 qresults = job.result()
@@ -124,6 +126,8 @@ print("\nIBM Q Backend %s: Resulting Values and Probabilities" % qbackend)
 print("===============================================\n")
 print("Simulated Runs:",qshots,"\n")
 
+# period, counts, prob,a0,a1,...,an
+#
 for key, val in qcounts.items():
        prob = val / qshots
        print("Period:", key, ", Counts:", val, ", Probability:", prob)
