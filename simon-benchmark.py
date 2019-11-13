@@ -65,7 +65,7 @@ def blackbox(period_string):
 def run_circuit(circuit):
         IBMQ.load_account()
         qprovider = IBMQ.get_provider(hub='ibm-q')
-        qbackend = qprovider.get_backend('ibmqx2')
+        qbackend = qprovider.get_backend('ibmq_essex')
 
         # Default for this backend seems to be 1024 ibmqx2
         shots = 1024
@@ -150,9 +150,6 @@ def print_list():
         # Look into nullspaces with numpy
         # Need to get x and y values based on above.. to help out
         
-        
-        
-        
 #### START ####         
 # hidden strings
 # We omit 00 as it's a trivial answer/solution
@@ -165,13 +162,18 @@ n = len(s1)
 
 # 2^n quantum registers half for control, half for data, 
 # n classical registers for the output
-qr = QuantumRegister(2*n)
-cr = ClassicalRegister(n)
+#qr = QuantumRegister(2*n)
+#cr = ClassicalRegister(n)
 
-circuitName = "Simon"
-simonCircuit = QuantumCircuit(qr,cr)
+#circuitName = "Simon"
+#simonCircuit = QuantumCircuit(qr,cr)
         
-for i in range(1):
+for i in range(2):
+
+        circuitName = "Simon"
+        qr = QuantumRegister(2*n)
+        cr = ClassicalRegister(n)
+        simonCircuit = QuantumCircuit(qr,cr)
 
         print("\n---- Results - Iteration: %d ----\n" % i)
         # Apply hadamards prior to oracle 
