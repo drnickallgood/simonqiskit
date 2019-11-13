@@ -168,14 +168,16 @@ n = len(s1)
 #circuitName = "Simon"
 #simonCircuit = QuantumCircuit(qr,cr)
         
-for i in range(2):
+main_results = list()
+
+for i in range(5):
 
         circuitName = "Simon"
         qr = QuantumRegister(2*n)
         cr = ClassicalRegister(n)
         simonCircuit = QuantumCircuit(qr,cr)
 
-        print("\n---- Results - Iteration: %d ----\n" % i)
+        #print("\n---- Results - Iteration: %d ----\n" % i)
         # Apply hadamards prior to oracle 
         for i in range(n):
                 simonCircuit.h(qr[i])
@@ -195,14 +197,22 @@ for i in range(2):
         # Measure qubits, maybe change to just first qubit to measure?
         simonCircuit.measure(qr[0:n],cr)
 
-        print(simonCircuit)
+        #print(simonCircuit)
 
         # Send to IBMQ
         results = run_circuit(simonCircuit)
-        print(results.get_counts())
-
+        #print(results.get_counts())
+        main_results.append(results)
         # Guassian elimination
-        guass_elim(results)
+        #guass_elim(results)
 
         # Parse results with equations / null space?
-        
+
+#sorted_x = sorted(qcounts.items(), key=operator.itemgetter(1), reverse=True)        
+print("\n--- Results ---\n")
+for i in main_results:
+        largest = max(i.get_counts().items(), key=lambda k: k[1])
+        print(largest)
+
+
+
