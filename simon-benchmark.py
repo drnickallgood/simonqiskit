@@ -65,7 +65,7 @@ def blackbox(period_string):
 def run_circuit(circuit):
         IBMQ.load_account()
         qprovider = IBMQ.get_provider(hub='ibm-q')
-        qbackend = qprovider.get_backend('ibmqx2')
+        qbackend = qprovider.get_backend('ibmq_vigo')
 
         # Default for this backend seems to be 1024 ibmqx2
         shots = 1024
@@ -154,7 +154,7 @@ def print_list():
         
         
 #### START ####         
-# hidden strings
+# hidden stringsn
 # We omit 00 as it's a trivial answer/solution
 
 s1 = "01"
@@ -170,33 +170,43 @@ cr = ClassicalRegister(n)
 
 circuitName = "Simon"
 simonCircuit = QuantumCircuit(qr,cr)
-        
-for i in range(1):
+       
+results_dict = dict()
 
-        print("\n---- Results - Iteration: %d ----\n" % i)
+circuitList = list()
+
+# Loop to create circuits
+print("--- Making circuits! ---\n")
+for j in range(5):
         # Apply hadamards prior to oracle 
         for i in range(n):
-                simonCircuit.h(qr[i])
-                
-        # Barrier
-        simonCircuit.barrier()
+            simonCircuit.h(qr[i])
+            simonCircuit.barrier()
 
         #call oracle for period string
         simonCircuit = blackbox(s1)
 
         # Apply hadamards after blackbox
         for i in range(n):
-                simonCircuit.h(qr[i])
+            simonCircuit.h(qr[i])
 
         simonCircuit.barrier()
 
         # Measure qubits, maybe change to just first qubit to measure?
         simonCircuit.measure(qr[0:n],cr)
+        
+        circuitList.append(simonCircuit)
 
-        print(simonCircuit)
+ # Run loop to send circuits to IBMQ..     
+for i in circuitList:
+
+        #print("\n---- Results - Iteration: %d ----\n" % i)
+
+        #print(simonCircuit)
 
         # Send to IBMQ
-        results = run_circuit(simonCircuit)
+        print("Sending data to IBMQ...\n")
+        results = run_circuit(i)
         print(results.get_counts())
 
         # Guassian elimination
