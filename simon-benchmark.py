@@ -66,7 +66,9 @@ def blackbox(period_string):
 def run_circuit(circuit):
         IBMQ.load_account()
         qprovider = IBMQ.get_provider(hub='ibm-q')
+
         qbackend = qprovider.get_backend('ibmq_london')
+
 
         # Default for this backend seems to be 1024 ibmqx2
         shots = 1024
@@ -151,9 +153,6 @@ def print_list():
         # Look into nullspaces with numpy
         # Need to get x and y values based on above.. to help out
         
-        
-        
-        
 #### START ####         
 # hidden stringsn
 # We omit 00 as it's a trivial answer/solution
@@ -166,8 +165,9 @@ n = len(s1)
 
 # 2^n quantum registers half for control, half for data, 
 # n classical registers for the output
-qr = QuantumRegister(2*n)
-cr = ClassicalRegister(n)
+#qr = QuantumRegister(2*n)
+#cr = ClassicalRegister(n)
+
 
 circuitName = "Simon"
 simonCircuit = QuantumCircuit(qr,cr)
@@ -179,6 +179,20 @@ circuitList = list()
 # Loop to create circuits
 print("--- Making circuits! ---\n")
 for j in range(5):
+#circuitName = "Simon"
+#simonCircuit = QuantumCircuit(qr,cr)
+        
+main_results = list()
+
+for i in range(5):
+
+        circuitName = "Simon"
+        qr = QuantumRegister(2*n)
+        cr = ClassicalRegister(n)
+        simonCircuit = QuantumCircuit(qr,cr)
+
+        #print("\n---- Results - Iteration: %d ----\n" % i)
+>>>>>>> b0dc66fcf5b6a3f8e8d9404b180e344271053142
         # Apply hadamards prior to oracle 
         for i in range(n):
             simonCircuit.h(qr[i])
@@ -203,6 +217,7 @@ for j in range(5):
  # Run loop to send circuits to IBMQ..     
 for i in circuitList:
 
+
         #print("\n---- Results - Iteration: %d ----\n" % i)
 
         #print(simonCircuit)
@@ -212,10 +227,19 @@ for i in circuitList:
         results = run_circuit(i)
         print(results.get_counts())
 
+
+        #print(simonCircuit)
+
+        # Send to IBMQ
+        results = run_circuit(simonCircuit)
+        #print(results.get_counts())
+        main_results.append(results)
+
         # Guassian elimination
-        guass_elim(results)
+        #guass_elim(results)
 
         # Parse results with equations / null space?
+
         
 ## function to get dot product of result string with the period string to verify, result should be 0
 #check the wikipedia for simons formula 
@@ -242,3 +266,14 @@ def verify_results(period, output):
 
 # Get working on remote server 
 
+=======
+
+#sorted_x = sorted(qcounts.items(), key=operator.itemgetter(1), reverse=True)        
+print("\n--- Results ---\n")
+for i in main_results:
+        largest = max(i.get_counts().items(), key=lambda k: k[1])
+        print(largest)
+
+
+
+>>>>>>> b0dc66fcf5b6a3f8e8d9404b180e344271053142
