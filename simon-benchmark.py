@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import operator
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute,Aer, IBMQ
+from qiskit.providers.ibmq.managed import IBMQJobManager
 from qiskit.tools.visualization import plot_histogram
 from qiskit.tools.visualization import circuit_drawer
 from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
@@ -65,7 +66,7 @@ def blackbox(period_string):
 def run_circuit(circuit):
         IBMQ.load_account()
         qprovider = IBMQ.get_provider(hub='ibm-q')
-        qbackend = qprovider.get_backend('ibmq_vigo')
+        qbackend = qprovider.get_backend('ibmq_london')
 
         # Default for this backend seems to be 1024 ibmqx2
         shots = 1024
@@ -197,6 +198,8 @@ for j in range(5):
         
         circuitList.append(simonCircuit)
 
+
+
  # Run loop to send circuits to IBMQ..     
 for i in circuitList:
 
@@ -214,3 +217,28 @@ for i in circuitList:
 
         # Parse results with equations / null space?
         
+## function to get dot product of result string with the period string to verify, result should be 0
+#check the wikipedia for simons formula 
+# DOT PRODUCT IS MOD 2 !!!!
+# Result XOR ?? = 0   -- this is what we're looking for!
+
+# We have to verify the period string with the ouptput using mod_2 addition aka XOR
+# Simply xor the period string with the output string, result must be 0 or 0b0
+def verify_results(period, output):
+    if (bin(int(period) ^ int(output))) == '0b0':
+        print("Result verified. Period string is: " + s)
+    else:
+        print("Result not correct. ")
+        print("Period string: " + period)
+        print("Computed string: " + output)
+    
+
+#numpy.dot(a,b)
+
+
+# use noise model for simulated code.. 
+
+# Get job queue stuff setup for stats collecting and print/filter things out.
+
+# Get working on remote server 
+

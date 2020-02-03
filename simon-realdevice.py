@@ -198,3 +198,26 @@ Period: 11 , Counts: 297 , Probability: 0.2900390625
 Period: 10 , Counts: 269 , Probability: 0.2626953125
 Period: 00 , Counts: 262 , Probability: 0.255859375
 '''
+
+
+#pd_bin = ''.join(format(ord(i), 'b') for i in s)
+
+#out_bin = ''.join(format(ord(i), 'b') for i in sorted_x[0][0])
+
+#print(int(pd_bin))
+#print(int(out_bin))
+
+#print(bin(pd_bin ^ out_bin))
+
+
+
+
+
+if (bin(int(s) ^ int(sorted_x[0][0]))) == '0b0':
+    print("Result verified. Period string is: " + s)
+else:
+    print("Result not correct. ")
+    print("Period string: " + s)
+    print("Computed string: " + sorted_x[0][0])
+        
+        
