@@ -192,7 +192,7 @@ for i in range(5):
         simonCircuit = QuantumCircuit(qr,cr)
 
         #print("\n---- Results - Iteration: %d ----\n" % i)
->>>>>>> b0dc66fcf5b6a3f8e8d9404b180e344271053142
+
         # Apply hadamards prior to oracle 
         for i in range(n):
             simonCircuit.h(qr[i])
@@ -266,7 +266,7 @@ def verify_results(period, output):
 
 # Get working on remote server 
 
-=======
+
 
 #sorted_x = sorted(qcounts.items(), key=operator.itemgetter(1), reverse=True)        
 print("\n--- Results ---\n")
@@ -276,4 +276,3 @@ for i in main_results:
 
 
 
->>>>>>> b0dc66fcf5b6a3f8e8d9404b180e344271053142
