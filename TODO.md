@@ -1,0 +1,3 @@
+- Fix verification for mod2 to do mod2 addition with a0 .. a_n results
+- Make cleaner OOP code
+- Fix job submission using IBM Qiskit job manager
