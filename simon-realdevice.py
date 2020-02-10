@@ -4,9 +4,12 @@ import numpy as np
 import operator
 
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute,Aer, IBMQ
+#from qiskit.providers.ibmq.managed import IBMQJobManager
 from qiskit.tools.visualization import plot_histogram
 from qiskit.tools.visualization import circuit_drawer
+from qiskit.tools.monitor import job_monitor
 from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
+from qiskit.providers.ibmq import least_busy
 
 # hidden string
 s = "10"
@@ -39,8 +42,10 @@ for i in range(n):
 	
 # get the small index j such it's "1"
 j = -1
-#reverse the string so that it takes
+#reverse the string so that it fixes the circuit drawing to be more normal
+# to the literature
 s = s[::-1]
+
 for i, c in enumerate(s):
 	if c == "1":
 		j = i
@@ -108,18 +113,27 @@ simonCircuit.measure(qr[0:n],cr)
 
 IBMQ.load_account()
 qprovider = IBMQ.get_provider(hub='ibm-q')
-qbackend = qprovider.get_backend('ibmq_vigo')
 
+#qprovider.backends()
+# Get the least busy backend
+qbackend = least_busy(qprovider.backends(filters=lambda x: x.configuration().n_qubits == 5 and not x.configuration().simulator and x.status().operational==True))
+print("least busy backend: ", qbackend)
+
+#qbackend = qprovider.get_backend('ibmq_vigo')
+#job_manager = IBMQJobManager()
 # Default for this backend seems to be 1024 ibmqx2
 qshots = 1024
-
+print("Submitting to IBM Q...\n")
 job = execute(simonCircuit,backend=qbackend, shots=qshots)
+job_monitor(job,interval=2)
+#job_set_bar = job_manager.run(simonCircuit, backend=qbackend, name='bar', max_experiments_per_job=5)
+#print(job_set_bar.report())
 qresults = job.result()
 qcounts = qresults.get_counts()
 #print("Getting Results...\n")
 #print(qcounts)
 #print("")
-print("Submitting to IBM Q...\n")
+
 
 
 print("\nIBM Q Backend %s: Resulting Values and Probabilities" % qbackend)
@@ -160,23 +174,54 @@ def mod(x,modulus):
 # Deal with negative and fractial values
 Y_new = Y_transformed[0].applyfunc(lambda x: mod(x,2))
 
+
 print("The hidden period a0, a1 ... a%d only satisfies these equations:" %(n-1))
 print("===============================================================\n")
 rows,cols = Y_new.shape
+
+equations = list()
+Yr = list()
 for r in range(rows):
         Yr = [ "a"+str(i)+"" for i,v in enumerate(list(Y_new[r,:])) if v==1]
         if len(Yr) > 0:
                 #tStr = " + ".join(Yr)
                 tStr = " mod2 ".join(Yr)
+                
+                #single value is 0, only xor period string with 0 to get 
+                if len(tStr) == 2:
+                    equations.append("period string xor" + " 0 " + " = 0")
+                else:
+                    equations.append("period string" + " xor " + tStr + " = 0")
                 #tStr = u' \2295 '.join(Yr)
                 print(tStr, "= 0") 
 
 # Now we need to solve this system of equations to get our period string
 print("")
+
+print("Here are the system of equations to solve")
+print("=========================================")
+print("Format: period_string xor a_x xor ... = 0\n")
+for eq in equations:
+    print(eq)
+    
+print()
+
 # Sort list by value
-sorted_x = sorted(qcounts.items(), key=operator.itemgetter(1), reverse=True)
+
+#reverse items to display back to original inputs
+# We reversed above because of how IBMQ handles "endianness" 
+reverse_strings = dict()
+s = s[::-1]
+
+for k,v in qcounts.items():
+    k = k[::-1]
+    reverse_strings[k] = v
+    
+sorted_x = sorted(reverse_strings.items(), key=operator.itemgetter(1), reverse=True)
 print("Sorted list of result strings by counts")
 print("======================================\n")
+
+# Print out list of items
 for i in sorted_x:
     print(i)
 #print(sorted_x)
@@ -200,24 +245,22 @@ Period: 00 , Counts: 262 , Probability: 0.255859375
 '''
 
 
-#pd_bin = ''.join(format(ord(i), 'b') for i in s)
-
-#out_bin = ''.join(format(ord(i), 'b') for i in sorted_x[0][0])
-
-#print(int(pd_bin))
-#print(int(out_bin))
-
-#print(bin(pd_bin ^ out_bin))
-
-
-
-
-
+# Already using a sorted list, the one with the highest probability is on top
+correct = 0
+incorrect = 0
 if (bin(int(s) ^ int(sorted_x[0][0]))) == '0b0':
     print("Result verified. Period string is: " + s)
+    correct = correct + 1
 else:
     print("Result not correct. ")
     print("Period string: " + s)
     print("Computed string: " + sorted_x[0][0])
+    incorrect = incorrect + 1
+    
+print("Total Correct Computations: " + str(correct))
+print("Total Incorrect Computations: " + str(incorrect))
+
+
+
         
         
