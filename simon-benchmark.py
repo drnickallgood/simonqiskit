@@ -4,6 +4,7 @@ import numpy as np
 import operator
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute,Aer, IBMQ
 from qiskit.providers.ibmq.managed import IBMQJobManager
+from qiskit.tools.monitor import job_monitor
 from qiskit.tools.visualization import plot_histogram
 from qiskit.tools.visualization import circuit_drawer
 from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
@@ -63,17 +64,12 @@ def blackbox(period_string):
         
         return simonCircuit
         
-def run_circuit(circuit):
-        IBMQ.load_account()
-        qprovider = IBMQ.get_provider(hub='ibm-q')
-
-        qbackend = qprovider.get_backend('ibmq_london')
-
-
+def run_circuit(circuit,backend):
         # Default for this backend seems to be 1024 ibmqx2
         shots = 1024
 
-        job = execute(simonCircuit,backend=qbackend, shots=shots)
+        job = execute(simonCircuit,backend=backend, shots=shots)
+        job_monitor(job,interval=2)
         results = job.result()
         return results
 
@@ -152,11 +148,29 @@ def print_list():
         # y value
         # Look into nullspaces with numpy
         # Need to get x and y values based on above.. to help out
-        
+
+## function to get dot product of result string with the period string to verify, result should be 0
+#check the wikipedia for simons formula 
+# DOT PRODUCT IS MOD 2 !!!!
+# Result XOR ?? = 0   -- this is what we're looking for!
+
+# We have to verify the period string with the ouptput using mod_2 addition aka XOR
+# Simply xor the period string with the output string, result must be 0 or 0b0
+def verify_results(period, output):
+    if (bin(int(period) ^ int(output))) == '0b0':
+        print("Result verified. Period string is: " + s)
+    else:
+        print("Result not correct. ")
+        print("Period string: " + period)
+        print("Computed string: " + output)
+    
+    
+            
 #### START ####         
 # hidden stringsn
 # We omit 00 as it's a trivial answer/solution
 
+s0 = "00"
 s1 = "01"
 s2 = "10"
 s3 = "11"
@@ -168,6 +182,23 @@ n = len(s1)
 #qr = QuantumRegister(2*n)
 #cr = ClassicalRegister(n)
 
+# IBM Q stuff..
+IBMQ.load_account()
+provider = IBMQ.get_provider(hub='ibm-q')
+
+# 15 qubit (broken?)
+melbourne = provider.get_backend('ibmq_16_melbourne')
+
+#5 qubit backends
+ibmqx2 = provider.get_backend('ibmqx2')     # Yorktown
+london = provider.get_backend('ibmq_london')
+essex = provider.get_backend('ibmq_essex')
+burlington = provider.get_backend('ibmq_burlington')
+ourense = provider.get_backend('ibmq_ourense')
+vigo = provider.get_backend('ibmq_vigo')
+
+# 32 qubit qasm simulator
+ibmq_sim = provider.get_backend('ibmq_qasm_simulator')
 
 circuitName = "Simon"
 simonCircuit = QuantumCircuit(qr,cr)
@@ -184,6 +215,7 @@ for j in range(5):
         
 main_results = list()
 
+# Make Circuits
 for i in range(5):
 
         circuitName = "Simon"
@@ -214,24 +246,23 @@ for i in range(5):
 
 
 
- # Run loop to send circuits to IBMQ..     
-for i in circuitList:
+# Run loop to send circuits to IBMQ..
+print("===== SENDING DATA TO IBMQ BACKENDS... =====\n")     
+for circuit in circuitList:
 
-
-        #print("\n---- Results - Iteration: %d ----\n" % i)
-
-        #print(simonCircuit)
-
-        # Send to IBMQ
-        print("Sending data to IBMQ...\n")
-        results = run_circuit(i)
+        # Send all circuits to all backends
+        # Keep track of circuit, backend, results
+        # Circuit ID -> Circuit Object, Backend Name, results (counts)
+        for backend in backend_list:
+            results = run_circuit(circuit,backend)
+        
         print(results.get_counts())
 
 
         #print(simonCircuit)
 
         # Send to IBMQ
-        results = run_circuit(simonCircuit)
+        #results = run_circuit(simonCircuit)
         #print(results.get_counts())
         main_results.append(results)
 
@@ -241,30 +272,15 @@ for i in circuitList:
         # Parse results with equations / null space?
 
         
-## function to get dot product of result string with the period string to verify, result should be 0
-#check the wikipedia for simons formula 
-# DOT PRODUCT IS MOD 2 !!!!
-# Result XOR ?? = 0   -- this is what we're looking for!
 
-# We have to verify the period string with the ouptput using mod_2 addition aka XOR
-# Simply xor the period string with the output string, result must be 0 or 0b0
-def verify_results(period, output):
-    if (bin(int(period) ^ int(output))) == '0b0':
-        print("Result verified. Period string is: " + s)
-    else:
-        print("Result not correct. ")
-        print("Period string: " + period)
-        print("Computed string: " + output)
-    
-
-#numpy.dot(a,b)
 
 
 # use noise model for simulated code.. 
 
-# Get job queue stuff setup for stats collecting and print/filter things out.
 
 # Get working on remote server 
+
+# Get visualizations / histograms
 
 
 
