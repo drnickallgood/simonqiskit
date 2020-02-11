@@ -11,7 +11,8 @@ from qiskit.tools.monitor import job_monitor
 from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
 from qiskit.providers.ibmq import least_busy
 
-# hidden string
+# hidden period string
+# Goes from most-significant bit to least-significant bit (left to right)
 s = "10"
 n = len(s)
 # Create registers
@@ -42,8 +43,10 @@ for i in range(n):
 	
 # get the small index j such it's "1"
 j = -1
+
 #reverse the string so that it fixes the circuit drawing to be more normal
-# to the literature
+# to the literature where the most significant bit is on TOP and least is on BOTTOM
+# IBMQ default this is reversed , LEAST is on TOP and MOST is on BOTTOM
 s = s[::-1]
 
 for i, c in enumerate(s):
@@ -185,7 +188,7 @@ for r in range(rows):
         Yr = [ "a"+str(i)+"" for i,v in enumerate(list(Y_new[r,:])) if v==1]
         if len(Yr) > 0:
                 #tStr = " + ".join(Yr)
-                tStr = " mod2 ".join(Yr)
+                tStr = " xor ".join(Yr)
                 
                 #single value is 0, only xor period string with 0 to get 
                 if len(tStr) == 2:
@@ -210,14 +213,18 @@ print()
 
 #reverse items to display back to original inputs
 # We reversed above because of how IBMQ handles "endianness" 
-reverse_strings = dict()
-s = s[::-1]
 
+
+#reverse_strings = dict()
+#s = s[::-1]
+
+"""
 for k,v in qcounts.items():
     k = k[::-1]
     reverse_strings[k] = v
-    
-sorted_x = sorted(reverse_strings.items(), key=operator.itemgetter(1), reverse=True)
+"""
+ 
+sorted_x = sorted(qcounts.items(), key=operator.itemgetter(1), reverse=True)
 print("Sorted list of result strings by counts")
 print("======================================\n")
 
