@@ -3,11 +3,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import operator
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute,Aer, IBMQ
-from qiskit.providers.ibmq.managed import IBMQJobManager
+#from qiskit.providers.ibmq.managed import IBMQJobManager
 from qiskit.tools.monitor import job_monitor
 from qiskit.tools.visualization import plot_histogram
 from qiskit.tools.visualization import circuit_drawer
 from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
+
+from qjob import QJob
 
 def blackbox(period_string):
         #### Blackbox Function #####
@@ -170,10 +172,37 @@ def verify_results(period, output):
 # hidden stringsn
 # We omit 00 as it's a trivial answer/solution
 
+period_strings_5qubit = list()
 s0 = "00"
 s1 = "01"
 s2 = "10"
 s3 = "11"
+s4 = "000"
+s5 = "001"
+s6 = "010"
+s7 = "011"
+s8 = "100"
+s9 = "101"
+s10 = "110"
+s11 = "111"
+s12 = "0000"
+s13 = "0001"
+s14 = "0010"
+s15 = "0011"
+s16 = "0100"
+s17 = "0101"
+s18 = "0110"
+s19 = "0111"
+s20 = "1000"
+s21 = "1001"
+s22 = "1010"
+s23 = "1011"
+s24 = "1100"
+s25 = "1101"
+s26 = "1110"
+s27 = "1111"
+
+
 n = len(s1)
 # Create registers
 
@@ -200,23 +229,19 @@ vigo = provider.get_backend('ibmq_vigo')
 # 32 qubit qasm simulator
 ibmq_sim = provider.get_backend('ibmq_qasm_simulator')
 
-circuitName = "Simon"
-simonCircuit = QuantumCircuit(qr,cr)
-       
-results_dict = dict()
+local_sim = Aer.get_backend('qasm_simulator')
 
+       
 circuitList = list()
 
 # Loop to create circuits
 print("--- Making circuits! ---\n")
-for j in range(5):
-#circuitName = "Simon"
-#simonCircuit = QuantumCircuit(qr,cr)
-        
-main_results = list()
+
+backend_list = dict()
+backend_list['ibmqx2'] = ibmqx2
 
 # Make Circuits
-for i in range(5):
+for i in range(1):
 
         circuitName = "Simon"
         qr = QuantumRegister(2*n)
@@ -247,16 +272,32 @@ for i in range(5):
 
 
 # Run loop to send circuits to IBMQ..
-print("===== SENDING DATA TO IBMQ BACKENDS... =====\n")     
+print("===== SENDING DATA TO IBMQ BACKENDS... =====\n")    
+ranJobs = list() 
+
+
 for circuit in circuitList:
 
         # Send all circuits to all backends
-        # Keep track of circuit, backend, results
-        # Circuit ID -> Circuit Object, Backend Name, results (counts)
-        for backend in backend_list:
-            results = run_circuit(circuit,backend)
+        # name -> backend object
+        for name in backend_list:
+            #results = run_circuit(circuit,backend)
+            # Put circuit in enhanced QJob class, and execute / return Job
+            job = execute(circuit,backend=backend_list[name],shots=1024)
+
+            job_monitor(job,interval=5)
+            
+            # Custom object to hold the job, circuit, and backend
+            qj = QJob(job,circuit,name)
+            # Append finished / ran job to list of jobs
+            ranJobs.append(qj)
+            # c = CircuitStruct(circuit,backend,results)
+            # main_results.append(c)
+            
+for job in ranJobs:
+    print(job.backend)
         
-        print(results.get_counts())
+        #print(results.get_counts())
 
 
         #print(simonCircuit)
@@ -264,7 +305,7 @@ for circuit in circuitList:
         # Send to IBMQ
         #results = run_circuit(simonCircuit)
         #print(results.get_counts())
-        main_results.append(results)
+        #main_results.append(results)
 
         # Guassian elimination
         #guass_elim(results)
@@ -285,10 +326,10 @@ for circuit in circuitList:
 
 
 #sorted_x = sorted(qcounts.items(), key=operator.itemgetter(1), reverse=True)        
-print("\n--- Results ---\n")
-for i in main_results:
-        largest = max(i.get_counts().items(), key=lambda k: k[1])
-        print(largest)
+#print("\n--- Results ---\n")
+#for i in main_results:
+#        largest = max(i.get_counts().items(), key=lambda k: k[1])
+#        print(largest)
 
 
 
