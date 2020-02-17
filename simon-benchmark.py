@@ -201,9 +201,69 @@ s24 = "1100"
 s25 = "1101"
 s26 = "1110"
 s27 = "1111"
+s28 = "10000"
+s29 = "10001"
+s30 = "10010"
+s31 = "10011"
+s32 = "10100"
+s33 = "10101"
+s34 = "10110"
+s35 = "10111"
+s36 = "11000"
+s37 = "11001"
+s38 = "11010"
+s39 = "11011"
+s40 = "11100"
+s41 = "11101"
+s42 = "11110"
+s43 = "11111"
 
+period_strings_5qubit.append(s0)
+period_strings_5qubit.append(s1)
+period_strings_5qubit.append(s2)
+period_strings_5qubit.append(s3)
+period_strings_5qubit.append(s4)
+period_strings_5qubit.append(s5)
+period_strings_5qubit.append(s6)
+period_strings_5qubit.append(s7)
+period_strings_5qubit.append(s8)
+period_strings_5qubit.append(s9)
+period_strings_5qubit.append(s10)
+period_strings_5qubit.append(s11)
+period_strings_5qubit.append(s12)
+period_strings_5qubit.append(s13)
+period_strings_5qubit.append(s14)
+period_strings_5qubit.append(s15)
+period_strings_5qubit.append(s16)
+period_strings_5qubit.append(s17)
+period_strings_5qubit.append(s18)
+period_strings_5qubit.append(s19)
+period_strings_5qubit.append(s20)
+period_strings_5qubit.append(s21)
+period_strings_5qubit.append(s22)
+period_strings_5qubit.append(s23)
+period_strings_5qubit.append(s24)
+period_strings_5qubit.append(s25)
+period_strings_5qubit.append(s26)
+period_strings_5qubit.append(s27)
+period_strings_5qubit.append(s28)
+period_strings_5qubit.append(s29)
+period_strings_5qubit.append(s30)
+period_strings_5qubit.append(s31)
+period_strings_5qubit.append(s32)
+period_strings_5qubit.append(s33)
+period_strings_5qubit.append(s34)
+period_strings_5qubit.append(s35)
+period_strings_5qubit.append(s36)
+period_strings_5qubit.append(s37)
+period_strings_5qubit.append(s38)
+period_strings_5qubit.append(s39)
+period_strings_5qubit.append(s40)
+period_strings_5qubit.append(s41)
+period_strings_5qubit.append(s42)
+period_strings_5qubit.append(s43)
 
-n = len(s1)
+#n = len(s1)
 # Create registers
 
 # 2^n quantum registers half for control, half for data, 
@@ -229,6 +289,7 @@ vigo = provider.get_backend('ibmq_vigo')
 # 32 qubit qasm simulator
 ibmq_sim = provider.get_backend('ibmq_qasm_simulator')
 
+# Local Simulator, 
 local_sim = Aer.get_backend('qasm_simulator')
 
        
@@ -238,43 +299,50 @@ circuitList = list()
 print("--- Making circuits! ---\n")
 
 backend_list = dict()
-backend_list['ibmqx2'] = ibmqx2
+backend_list['local_sim'] = local_sim
 
-# Make Circuits
-for i in range(1):
+#backend_list['ibmqx2'] = ibmqx2
+#backend_list['london'] = london
+#backend_list['essex'] = essex
+#backend_list['burlington'] = burlington
+#backend_list['ourense'] = ourense
+#backend_list['vigo'] = vigo
 
-        circuitName = "Simon"
-        qr = QuantumRegister(2*n)
-        cr = ClassicalRegister(n)
-        simonCircuit = QuantumCircuit(qr,cr)
 
-        #print("\n---- Results - Iteration: %d ----\n" % i)
+# Make Circuits for all period strings!
+for p in period_strings_5qubit:
+    circuitName = "Simon" + p
+    n = len(p)
+    qr = QuantumRegister(2*n)
+    cr = ClassicalRegister(n)
+    simonCircuit = QuantumCircuit(qr,cr)
 
-        # Apply hadamards prior to oracle 
-        for i in range(n):
-            simonCircuit.h(qr[i])
-            simonCircuit.barrier()
+    #print("\n---- Results - Iteration: %d ----\n" % i)
 
-        #call oracle for period string
-        simonCircuit = blackbox(s1)
-
-        # Apply hadamards after blackbox
-        for i in range(n):
-            simonCircuit.h(qr[i])
-
+    # Apply hadamards prior to oracle 
+    for i in range(n):
+        simonCircuit.h(qr[i])
         simonCircuit.barrier()
 
-        # Measure qubits, maybe change to just first qubit to measure?
-        simonCircuit.measure(qr[0:n],cr)
-        
-        circuitList.append(simonCircuit)
+    #call oracle for period string
+    simonCircuit = blackbox(p)
+
+    # Apply hadamards after blackbox
+    for i in range(n):
+        simonCircuit.h(qr[i])
+
+    simonCircuit.barrier()
+
+    # Measure qubits, maybe change to just first qubit to measure?
+    simonCircuit.measure(qr[0:n],cr)
+    
+    circuitList.append(simonCircuit)
 
 
 
 # Run loop to send circuits to IBMQ..
 print("===== SENDING DATA TO IBMQ BACKENDS... =====\n")    
 ranJobs = list() 
-
 
 for circuit in circuitList:
 

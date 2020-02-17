@@ -294,7 +294,7 @@ for x in sorted_x:
     obs_strings.append(x[0])
     
 for o in obs_strings:
-    # Need to re-reverse string
+    # Need to re-reverse string, so it's "normal"
     if verify_string(o, s[::-1]):
         print("Correct Result: " + o )
         correct += 1
