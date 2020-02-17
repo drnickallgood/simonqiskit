@@ -25,6 +25,8 @@ cr = ClassicalRegister(n)
 circuitName = "Simon"
 simonCircuit = QuantumCircuit(qr,cr)
 
+local_sim = Aer.get_backend('qasm_simulator')
+
 # Apply hadamards prior to oracle 
 for i in range(n):
 	simonCircuit.h(qr[i])
@@ -119,8 +121,9 @@ qprovider = IBMQ.get_provider(hub='ibm-q')
 
 #qprovider.backends()
 # Get the least busy backend
-qbackend = least_busy(qprovider.backends(filters=lambda x: x.configuration().n_qubits == 5 and not x.configuration().simulator and x.status().operational==True))
-print("least busy backend: ", qbackend)
+#qbackend = least_busy(qprovider.backends(filters=lambda x: x.configuration().n_qubits == 5 and not x.configuration().simulator and x.status().operational==True))
+qbackend = local_sim
+#print("least busy backend: ", qbackend)
 
 #qbackend = qprovider.get_backend('ibmq_vigo')
 #job_manager = IBMQJobManager()
@@ -128,6 +131,7 @@ print("least busy backend: ", qbackend)
 qshots = 1024
 print("Submitting to IBM Q...\n")
 job = execute(simonCircuit,backend=qbackend, shots=qshots)
+
 job_monitor(job,interval=2)
 #job_set_bar = job_manager.run(simonCircuit, backend=qbackend, name='bar', max_experiments_per_job=5)
 #print(job_set_bar.report())
@@ -139,7 +143,7 @@ qcounts = qresults.get_counts()
 
 
 
-print("\nIBM Q Backend %s: Resulting Values and Probabilities" % qbackend)
+print("\nIBM Q Backend %s: Resulting Values and Probabilities" % local_sim)
 print("===============================================\n")
 print("Simulated Runs:",qshots,"\n")
 
@@ -147,7 +151,7 @@ print("Simulated Runs:",qshots,"\n")
 #
 for key, val in qcounts.items():
        prob = val / qshots
-       print("Period:", key, ", Counts:", val, ", Probability:", prob)
+       print("Observed String:", key, ", Counts:", val, ", Probability:", prob)
        
 print("")
 
@@ -255,17 +259,54 @@ Period: 00 , Counts: 262 , Probability: 0.255859375
 # Already using a sorted list, the one with the highest probability is on top
 correct = 0
 incorrect = 0
-if (bin(int(s) ^ int(sorted_x[0][0]))) == '0b0':
-    print("Result verified. Period string is: " + s)
-    correct = correct + 1
-else:
-    print("Result not correct. ")
-    print("Period string: " + s)
-    print("Computed string: " + sorted_x[0][0])
-    incorrect = incorrect + 1
+def verify_string(ostr, pstr):
+    """
+    Verify string with period string
+    Does dot product and then mod2 addition
+    """
+    temp_list = list()
+    # loop through outstring, make into numpy array
+    for o in ostr:
+        temp_list.append(int(o))
     
-print("Total Correct Computations: " + str(correct))
-print("Total Incorrect Computations: " + str(incorrect))
+    ostr_arr = np.asarray(temp_list)
+    temp_list.clear()
+    
+    # loop through period string, make into numpy array
+   
+    for p in pstr:
+        temp_list.append(int(p))
+        
+    pstr_arr = np.asarray(temp_list)
+    
+    temp_list.clear()
+    
+    # Per Simosn, we do the dot product of the np arrays and then do mod 2
+    results = np.dot(ostr_arr, pstr_arr)
+    
+    if results % 2 == 0:
+        return True
+     
+    return False
+
+obs_strings = list()
+for x in sorted_x:
+    obs_strings.append(x[0])
+    
+for o in obs_strings:
+    # Need to re-reverse string
+    if verify_string(o, s[::-1]):
+        print("Correct Result: " + o )
+        correct += 1
+    else:
+        print("Incorrect Result: " + o)
+        incorrect += 1
+    
+print("\n===== Correct vs Incorrect Computations =====\n")
+print("Total Correct: " + str(correct))
+print("Total Incorrect: " + str(incorrect))
+print("")
+
 
 
 
