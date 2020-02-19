@@ -2,5 +2,6 @@
 *.log
 *venv
 ibmq-acct.py
+freebsd-vars.sh
 
 
