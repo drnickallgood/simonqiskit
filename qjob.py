@@ -1,9 +1,12 @@
-""" 
-Enhanced quantum circuit to hold backend information and other potential useful reporting parameters
-
-"""
 
 class QJob:
+	"""
+	Enhanced quantum circuit to hold backend information and other potential useful reporting parameters
+	"""
+
+	#Correct  and incorrect values
+	_correct = 0
+	_incorrect = 0
 
     def __init__(self, job, circuit, backend):
         self.job = job
@@ -22,6 +25,13 @@ class QJob:
     def job(self):
         return job
         
+	def correct(self,val):
+		selt._correct += val
+		return str(self._correct)
+
+	def incorrect(self,val):
+		self._incorrect += val
+		return str(self._incorrect)
  
         
 		

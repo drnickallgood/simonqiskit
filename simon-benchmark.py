@@ -158,16 +158,39 @@ def print_list():
 
 # We have to verify the period string with the ouptput using mod_2 addition aka XOR
 # Simply xor the period string with the output string, result must be 0 or 0b0
-def verify_results(period, output):
-    if (bin(int(period) ^ int(output))) == '0b0':
-        print("Result verified. Period string is: " + s)
-    else:
-        print("Result not correct. ")
-        print("Period string: " + period)
-        print("Computed string: " + output)
+correct = 0^M
+incorrect = 0^M
+def verify_string(ostr, pstr):
+    """
+    Verify string with period string
+    Does dot product and then mod2 addition
+    """
+    temp_list = list()
+    # loop through outstring, make into numpy array
+    for o in ostr:
+        temp_list.append(int(o))
     
+    ostr_arr = np.asarray(temp_list)
+    temp_list.clear()
     
-            
+    # loop through period string, make into numpy array
+   
+    for p in pstr:
+        temp_list.append(int(p))
+        
+    pstr_arr = np.asarray(temp_list)
+    
+    temp_list.clear()
+    
+    # Per Simosn, we do the dot product of the np arrays and then do mod 2
+    results = np.dot(ostr_arr, pstr_arr)
+    
+    if results % 2 == 0:
+        return True
+     
+    return False
+    
+
 #### START ####         
 # hidden stringsn
 # We omit 00 as it's a trivial answer/solution
@@ -263,14 +286,6 @@ period_strings_5qubit.append(s41)
 period_strings_5qubit.append(s42)
 period_strings_5qubit.append(s43)
 
-#n = len(s1)
-# Create registers
-
-# 2^n quantum registers half for control, half for data, 
-# n classical registers for the output
-#qr = QuantumRegister(2*n)
-#cr = ClassicalRegister(n)
-
 # IBM Q stuff..
 IBMQ.load_account()
 provider = IBMQ.get_provider(hub='ibm-q')
@@ -292,11 +307,7 @@ ibmq_sim = provider.get_backend('ibmq_qasm_simulator')
 # Local Simulator, 
 local_sim = Aer.get_backend('qasm_simulator')
 
-       
 circuitList = list()
-
-# Loop to create circuits
-print("--- Making circuits! ---\n")
 
 backend_list = dict()
 backend_list['local_sim'] = local_sim
@@ -311,13 +322,13 @@ backend_list['local_sim'] = local_sim
 
 # Make Circuits for all period strings!
 for p in period_strings_5qubit:
+
+	# Circuit name = Simon_+ period string
     circuitName = "Simon" + p
     n = len(p)
     qr = QuantumRegister(2*n)
     cr = ClassicalRegister(n)
     simonCircuit = QuantumCircuit(qr,cr)
-
-    #print("\n---- Results - Iteration: %d ----\n" % i)
 
     # Apply hadamards prior to oracle 
     for i in range(n):
@@ -333,11 +344,10 @@ for p in period_strings_5qubit:
 
     simonCircuit.barrier()
 
-    # Measure qubits, maybe change to just first qubit to measure?
+    # Measure qubits, maybe change to just first qubit to measure
     simonCircuit.measure(qr[0:n],cr)
     
     circuitList.append(simonCircuit)
-
 
 
 # Run loop to send circuits to IBMQ..
@@ -351,6 +361,7 @@ for circuit in circuitList:
         for name in backend_list:
             #results = run_circuit(circuit,backend)
             # Put circuit in enhanced QJob class, and execute / return Job
+			# default 1024 shots
             job = execute(circuit,backend=backend_list[name],shots=1024)
 
             job_monitor(job,interval=5)
@@ -362,8 +373,10 @@ for circuit in circuitList:
             # c = CircuitStruct(circuit,backend,results)
             # main_results.append(c)
             
+#print("Finished!")
+"""
 for job in ranJobs:
-    print(job.backend)
+    	print(job.backend)
         
         #print(results.get_counts())
 
@@ -399,5 +412,5 @@ for job in ranJobs:
 #        largest = max(i.get_counts().items(), key=lambda k: k[1])
 #        print(largest)
 
-
+"""
 

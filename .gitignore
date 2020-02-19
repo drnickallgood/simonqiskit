@@ -1,4 +1,5 @@
 *.*~
+*pycache*
 *.log
 *venv
 ibmq-acct.py
