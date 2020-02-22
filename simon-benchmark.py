@@ -101,7 +101,7 @@ def guass_elim(results):
         # Classical post processing via Guassian elimination for the linear equations
         # Y a = 0
         # k[::-1], we reverse the order of the bitstring
-
+        equations = list()
         lAnswer = [ (k[::-1],v) for k,v in results.get_counts().items() if k != "0"*n ]
 
         # Sort basis by probabilities
@@ -123,21 +123,23 @@ def guass_elim(results):
         # Deal with negative and fractial values
         Y_new = Y_transformed[0].applyfunc(lambda x: mod(x,2))
 
-        print("\nThe hidden period a0, ... a%d only satisfies these equations:" %(n-1))
-        print("===============================================================\n")
+        #print("\nThe hidden period a0, ... a%d only satisfies these equations:" %(n-1))
+        #print("===============================================================\n")
         rows,cols = Y_new.shape
         for r in range(rows):
                         Yr = [ "a"+str(i)+"" for i,v in enumerate(list(Y_new[r,:])) if v==1]
                         if len(Yr) > 0:
-                                        #tStr = " + ".join(Yr)
-                                        tStr = " mod2 ".join(Yr)
-                                        #tStr = u' \2295 '.join(Yr)
-                                        print(tStr, "= 0") 
+                                tStr = " xor ".join(Yr)
 
-        print("")
-        return True
+                                #single value is 0, only xor with perid string 0 to get
+                                if len(tStr) == 2:
+                                        equations.append("period xor" + " 0 " + " = 0")
+                                else:
+                                        equations.append("period" + " xor " + tStr + " = 0")
+
+        return equations
                                         
-def print_list():
+def print_list(results):
 # Sort list by value
         sorted_x = sorted(qcounts.items(), key=operator.itemgetter(1), reverse=True)
         print("Sorted list of result strings by counts")
@@ -146,10 +148,7 @@ def print_list():
                 print(i)
         #print(sorted_x)
         print("")
-        # Now once we have our found string, we need to double-check by XOR back to the
-        # y value
-        # Look into nullspaces with numpy
-        # Need to get x and y values based on above.. to help out
+
 
 ## function to get dot product of result string with the period string to verify, result should be 0
 #check the wikipedia for simons formula 
@@ -157,17 +156,37 @@ def print_list():
 # Result XOR ?? = 0   -- this is what we're looking for!
 
 # We have to verify the period string with the ouptput using mod_2 addition aka XOR
-# Simply xor the period string with the output string, result must be 0 or 0b0
-def verify_results(period, output):
-    if (bin(int(period) ^ int(output))) == '0b0':
-        print("Result verified. Period string is: " + s)
-    else:
-        print("Result not correct. ")
-        print("Period string: " + period)
-        print("Computed string: " + output)
+# Simply xor the period string with the output string    
+def verify_string(ostr, pstr):
+    """
+    Verify string with period string
+    Does dot product and then mod2 addition
+    """
+    temp_list = list()
+    # loop through outstring, make into numpy array
+    for o in ostr:
+        temp_list.append(int(o))
     
+    ostr_arr = np.asarray(temp_list)
+    temp_list.clear()
     
-            
+    # loop through period string, make into numpy array
+   
+    for p in pstr:
+        temp_list.append(int(p))
+        
+    pstr_arr = np.asarray(temp_list)
+    
+    temp_list.clear()
+    
+    # Per Simosn, we do the dot product of the np arrays and then do mod 2
+    results = np.dot(ostr_arr, pstr_arr)
+    
+    if results % 2 == 0:
+        return True
+     
+    return False
+           
 #### START ####         
 # hidden stringsn
 # We omit 00 as it's a trivial answer/solution
@@ -352,7 +371,7 @@ for circuit in circuitList:
             #results = run_circuit(circuit,backend)
             # Put circuit in enhanced QJob class, and execute / return Job
             job = execute(circuit,backend=backend_list[name],shots=1024)
-
+            print("Running job on backend: " + name)
             job_monitor(job,interval=5)
             
             # Custom object to hold the job, circuit, and backend
@@ -362,39 +381,23 @@ for circuit in circuitList:
             # c = CircuitStruct(circuit,backend,results)
             # main_results.append(c)
             
-for job in ranJobs:
-    print(job.backend)
+for ran in ranJobs:
+        results = ran.job.result()
+        equations = guass_elim(results)
+        sorted_x = sorted(results.get_counts().items(), key=operator.itemgetter(1), reverse=True)
+        # for i,j in sorted_x:
+        #  get string only..
+        #if verify_string(ostr,pstr)
+        # mark correct or incorrect
+        # each Qjob object has the correct and incorrect
+        # 
+
+        #print(ran.job.result())
         
         #print(results.get_counts())
 
 
-        #print(simonCircuit)
 
-        # Send to IBMQ
-        #results = run_circuit(simonCircuit)
-        #print(results.get_counts())
-        #main_results.append(results)
-
-        # Guassian elimination
-        #guass_elim(results)
-
-        # Parse results with equations / null space?
-
-        
-
-
-
-# use noise model for simulated code.. 
-
-
-# Get working on remote server 
-
-# Get visualizations / histograms
-
-
-
-#sorted_x = sorted(qcounts.items(), key=operator.itemgetter(1), reverse=True)        
-#print("\n--- Results ---\n")
 #for i in main_results:
 #        largest = max(i.get_counts().items(), key=lambda k: k[1])
 #        print(largest)
