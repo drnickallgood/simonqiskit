@@ -1,5 +1,8 @@
 *.*~
 *.log
 simon-venv
+*#
+*_
+.#scratch
 
 
