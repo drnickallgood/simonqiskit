@@ -157,6 +157,7 @@ def print_list(results):
 
 # We have to verify the period string with the ouptput using mod_2 addition aka XOR
 # Simply xor the period string with the output string    
+# Simply xor the period string with the output string, result must be 0 or 0b0
 def verify_string(ostr, pstr):
     """
     Verify string with period string
@@ -186,7 +187,7 @@ def verify_string(ostr, pstr):
         return True
      
     return False
-           
+
 #### START ####         
 # hidden stringsn
 # We omit 00 as it's a trivial answer/solution
@@ -282,14 +283,6 @@ period_strings_5qubit.append(s41)
 period_strings_5qubit.append(s42)
 period_strings_5qubit.append(s43)
 
-#n = len(s1)
-# Create registers
-
-# 2^n quantum registers half for control, half for data, 
-# n classical registers for the output
-#qr = QuantumRegister(2*n)
-#cr = ClassicalRegister(n)
-
 # IBM Q stuff..
 IBMQ.load_account()
 provider = IBMQ.get_provider(hub='ibm-q')
@@ -311,11 +304,7 @@ ibmq_sim = provider.get_backend('ibmq_qasm_simulator')
 # Local Simulator, 
 local_sim = Aer.get_backend('qasm_simulator')
 
-       
 circuitList = list()
-
-# Loop to create circuits
-print("--- Making circuits! ---\n")
 
 backend_list = dict()
 backend_list['local_sim'] = local_sim
@@ -330,13 +319,13 @@ backend_list['local_sim'] = local_sim
 
 # Make Circuits for all period strings!
 for p in period_strings_5qubit:
+
+	# Circuit name = Simon_+ period string
     circuitName = "Simon" + p
     n = len(p)
     qr = QuantumRegister(2*n)
     cr = ClassicalRegister(n)
     simonCircuit = QuantumCircuit(qr,cr)
-
-    #print("\n---- Results - Iteration: %d ----\n" % i)
 
     # Apply hadamards prior to oracle 
     for i in range(n):
@@ -352,11 +341,10 @@ for p in period_strings_5qubit:
 
     simonCircuit.barrier()
 
-    # Measure qubits, maybe change to just first qubit to measure?
+    # Measure qubits, maybe change to just first qubit to measure
     simonCircuit.measure(qr[0:n],cr)
     
     circuitList.append(simonCircuit)
-
 
 
 # Run loop to send circuits to IBMQ..
@@ -370,6 +358,7 @@ for circuit in circuitList:
         for name in backend_list:
             #results = run_circuit(circuit,backend)
             # Put circuit in enhanced QJob class, and execute / return Job
+			# default 1024 shots
             job = execute(circuit,backend=backend_list[name],shots=1024)
             print("Running job on backend: " + name)
             job_monitor(job,interval=5)
@@ -393,14 +382,4 @@ for ran in ranJobs:
         # 
 
         #print(ran.job.result())
-        
-        #print(results.get_counts())
-
-
-
-#for i in main_results:
-#        largest = max(i.get_counts().items(), key=lambda k: k[1])
-#        print(largest)
-
-
 

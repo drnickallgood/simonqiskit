@@ -1,8 +1,12 @@
 *.*~
+*pycache*
 *.log
 simon-venv
 *#
 *_
 .#scratch
+*venv
+ibmq-acct.py
+freebsd-vars.sh
 
 
