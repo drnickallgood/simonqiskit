@@ -321,11 +321,13 @@ backend_list['local_sim'] = local_sim
 for p in period_strings_5qubit:
 
 	# Circuit name = Simon_+ period string
-    circuitName = "Simon" + p
+    #circuitName = "Simon-" + p
+
+    circuitName = p
     n = len(p)
     qr = QuantumRegister(2*n)
     cr = ClassicalRegister(n)
-    simonCircuit = QuantumCircuit(qr,cr)
+    simonCircuit = QuantumCircuit(qr,cr,name=circuitName)
 
     # Apply hadamards prior to oracle 
     for i in range(n):
@@ -369,17 +371,39 @@ for circuit in circuitList:
             ranJobs.append(qj)
             # c = CircuitStruct(circuit,backend,results)
             # main_results.append(c)
-            
-for ran in ranJobs:
-        results = ran.job.result()
+
+correct = 0
+incorrect = 0
+for qjob in ranJobs:
+        # Results from each job
+        results = qjob.job.result()
+        # equations from each job
         equations = guass_elim(results)
-        sorted_x = sorted(results.get_counts().items(), key=operator.itemgetter(1), reverse=True)
-        # for i,j in sorted_x:
-        #  get string only..
-        #if verify_string(ostr,pstr)
-        # mark correct or incorrect
-        # each Qjob object has the correct and incorrect
-        # 
 
-        #print(ran.job.result())
+        #period string encoded into name
+        pstr = qjob.circuit.name
 
+        #list of observed strings
+        obs_strings = list()
+    
+        # Sorted strings from each job
+        sorted_str = sorted(results.get_counts().items(), key=operator.itemgetter(1), reverse=True)
+
+        # Get just the observed strings
+        for string in sorted_str:
+                obs_strings.append(string[0])
+
+        # go through and verify strings
+        for o in obs_strings:
+                # Remember to re-reverse string so it's back to normal due to IBMQ Endianness
+                if verify_string(o,pstr):
+                        correct += 1
+                else:
+                        incorrect += 1
+
+print("\n===== RESULTS =====\n")
+print("Total Correct Results: " + str(correct))
+print("Total Incorrect Results: " + str(incorrect))
+print("\n===================\n")
+
+        

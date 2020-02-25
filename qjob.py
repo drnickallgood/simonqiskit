@@ -1,13 +1,9 @@
 
 class QJob:
-	"""
-	Enhanced quantum circuit to hold backend information and other potential useful reporting parameters
-	"""
-
-	#Correct  and incorrect values
-	_correct = 0
-	_incorrect = 0
-
+    """	
+    Enhanced quantum circuit to hold backend information and other potential useful reporting parameters
+    """
+        
     # Correct / Incorrect 
     _correct = 0
     _incorrect = 0
@@ -29,10 +25,10 @@ class QJob:
         return job
 
     def setCorrect(self):
-        pass
+        self._correct += 1
 
     def setIncorrect(self):
-        pass
+        self._incorrect += 1
 
     def correct(self):
         return str(self._correct)

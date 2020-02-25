@@ -23,7 +23,8 @@ qr = QuantumRegister(2*n)
 cr = ClassicalRegister(n)
 
 circuitName = "Simon"
-simonCircuit = QuantumCircuit(qr,cr)
+simonCircuit = QuantumCircuit(qr,cr, name=circuitName)
+#print(simonCircuit.name)
 
 local_sim = Aer.get_backend('qasm_simulator')
 
@@ -133,6 +134,8 @@ print("Submitting to IBM Q...\n")
 job = execute(simonCircuit,backend=qbackend, shots=qshots)
 
 job_monitor(job,interval=2)
+
+
 #job_set_bar = job_manager.run(simonCircuit, backend=qbackend, name='bar', max_experiments_per_job=5)
 #print(job_set_bar.report())
 qresults = job.result()
