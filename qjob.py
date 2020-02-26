@@ -4,13 +4,12 @@ class QJob:
     Enhanced quantum circuit to hold backend information and other potential useful reporting parameters
     """
         
-    # Correct / Incorrect 
-    _correct = 0
-    _incorrect = 0
-    def __init__(self, job, circuit, backend):
+    def __init__(self, job, circuit, backend,correct=None,incorrect=None):
         self.job = job
         self.circuit = circuit
         self.backend = backend
+        self.correct = correct
+        self.incorrect = incorrect
         
     # Returns string of backend name
     def backend(self):
@@ -25,16 +24,16 @@ class QJob:
         return job
 
     def setCorrect(self):
-        self._correct += 1
+        self.correct += 1
 
     def setIncorrect(self):
-        self._incorrect += 1
+        self.incorrect += 1
 
     def correct(self):
-        return str(self._correct)
+        return self.correct
 
     def incorrect(self):
-        return str(self._incorrect)
+        return self.incorrect
  
         
 		

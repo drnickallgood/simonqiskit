@@ -18,6 +18,7 @@ def blackbox(period_string):
 
         # Copy first register to second by using CNOT gates
         for i in range(n):
+                #simonCircuit.cx(qr[i],qr[n+i])
                 simonCircuit.cx(qr[i],qr[n+i])
                 
         # get the small index j such it's "1"
@@ -205,6 +206,8 @@ s8 = "100"
 s9 = "101"
 s10 = "110"
 s11 = "111"
+
+
 s12 = "0000"
 s13 = "0001"
 s14 = "0010"
@@ -221,6 +224,8 @@ s24 = "1100"
 s25 = "1101"
 s26 = "1110"
 s27 = "1111"
+
+
 s28 = "10000"
 s29 = "10001"
 s30 = "10010"
@@ -238,10 +243,13 @@ s41 = "11101"
 s42 = "11110"
 s43 = "11111"
 
+
 period_strings_5qubit.append(s0)
 period_strings_5qubit.append(s1)
 period_strings_5qubit.append(s2)
 period_strings_5qubit.append(s3)
+
+"""
 period_strings_5qubit.append(s4)
 period_strings_5qubit.append(s5)
 period_strings_5qubit.append(s6)
@@ -250,6 +258,7 @@ period_strings_5qubit.append(s8)
 period_strings_5qubit.append(s9)
 period_strings_5qubit.append(s10)
 period_strings_5qubit.append(s11)
+
 period_strings_5qubit.append(s12)
 period_strings_5qubit.append(s13)
 period_strings_5qubit.append(s14)
@@ -266,6 +275,7 @@ period_strings_5qubit.append(s24)
 period_strings_5qubit.append(s25)
 period_strings_5qubit.append(s26)
 period_strings_5qubit.append(s27)
+
 period_strings_5qubit.append(s28)
 period_strings_5qubit.append(s29)
 period_strings_5qubit.append(s30)
@@ -282,6 +292,7 @@ period_strings_5qubit.append(s40)
 period_strings_5qubit.append(s41)
 period_strings_5qubit.append(s42)
 period_strings_5qubit.append(s43)
+"""
 
 # IBM Q stuff..
 IBMQ.load_account()
@@ -325,6 +336,8 @@ for p in period_strings_5qubit:
 
     circuitName = p
     n = len(p)
+    # For simons, we use the first n registers for control qubits
+    # We use the last n registers for data qubits.. which is why we need 2*n
     qr = QuantumRegister(2*n)
     cr = ClassicalRegister(n)
     simonCircuit = QuantumCircuit(qr,cr,name=circuitName)
@@ -367,13 +380,17 @@ for circuit in circuitList:
             
             # Custom object to hold the job, circuit, and backend
             qj = QJob(job,circuit,name)
+
+            # We have the job now, we can verify the string
+
+
             # Append finished / ran job to list of jobs
             ranJobs.append(qj)
-            # c = CircuitStruct(circuit,backend,results)
-            # main_results.append(c)
+
 
 correct = 0
 incorrect = 0
+
 for qjob in ranJobs:
         # Results from each job
         results = qjob.job.result()
@@ -397,13 +414,29 @@ for qjob in ranJobs:
         for o in obs_strings:
                 # Remember to re-reverse string so it's back to normal due to IBMQ Endianness
                 if verify_string(o,pstr):
+                        qjob.setCorrect()
                         correct += 1
                 else:
+                        qjob.setIncorrect()
                         incorrect += 1
 
-print("\n===== RESULTS =====\n")
-print("Total Correct Results: " + str(correct))
-print("Total Incorrect Results: " + str(incorrect))
-print("\n===================\n")
+"""
+Move this to new method
 
+total = correct + incorrect
+pcorrect = 100*(correct / total)
+
+# Fix divide by 0 for simulation, since simulations should never have incorrect results
+# Due to no quantum noise
+if correct == total:
+    pincorrect = 0
+else:
+    pincorrect = 100*(incorrect / total)
+
+print("\n===== RESULTS =====\n")
+print("Total Results: " + str(total))
+print("Total Correct Results: " + str(correct) + " -- " + str(pcorrect) + "%") 
+print("Total Inorrect Results: " + str(incorrect) + " -- " + str(pincorrect) + "%")
+print("\n===================\n")
+"""
         
