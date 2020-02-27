@@ -363,6 +363,25 @@ for p in period_strings_5qubit:
 
 
 # Run loop to send circuits to IBMQ..
+local_sim_ranJobs = list()
+ibmqx2_ranJobs = list()
+london_ranJobs = list()
+essex_ranJobs = list()
+burlington_ranJobs = list()
+ourense_ranJobs = list()
+vigo_ranJobs = list()
+ibmq_sim_ranJobs = list()
+melbourne_ranJobs = list()
+
+'''
+I think we need to .. get all the job's associated to the backend and organize them
+create a list for each backend's completed jobs (qjobs)
+run through this list, and then verify the string, and update each object with correct vs incorrect
+Total correct for each backend
+total incorrect for each bakend
+'''
+
+
 print("===== SENDING DATA TO IBMQ BACKENDS... =====\n")    
 ranJobs = list() 
 
@@ -381,11 +400,10 @@ for circuit in circuitList:
             # Custom object to hold the job, circuit, and backend
             qj = QJob(job,circuit,name)
 
-            # We have the job now, we can verify the string
-
 
             # Append finished / ran job to list of jobs
             ranJobs.append(qj)
+
 
 
 correct = 0
