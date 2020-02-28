@@ -318,9 +318,9 @@ local_sim = Aer.get_backend('qasm_simulator')
 circuitList = list()
 
 backend_list = dict()
-backend_list['local_sim'] = local_sim
+#backend_list['local_sim'] = local_sim
 
-#backend_list['ibmqx2'] = ibmqx2
+backend_list['ibmqx2'] = ibmqx2
 #backend_list['london'] = london
 #backend_list['essex'] = essex
 #backend_list['burlington'] = burlington
@@ -331,7 +331,7 @@ backend_list['local_sim'] = local_sim
 # Make Circuits for all period strings!
 for p in period_strings_5qubit:
 
-	# Circuit name = Simon_+ period string
+        # Circuit name = Simon_+ period string
     #circuitName = "Simon-" + p
 
     circuitName = p
@@ -381,6 +381,8 @@ Total correct for each backend
 total incorrect for each bakend
 '''
 
+        
+
 
 print("===== SENDING DATA TO IBMQ BACKENDS... =====\n")    
 ranJobs = list() 
@@ -392,7 +394,7 @@ for circuit in circuitList:
         for name in backend_list:
             #results = run_circuit(circuit,backend)
             # Put circuit in enhanced QJob class, and execute / return Job
-			# default 1024 shots
+                        # default 1024 shots
             job = execute(circuit,backend=backend_list[name],shots=1024)
             print("Running job on backend: " + name)
             job_monitor(job,interval=5)
@@ -400,10 +402,11 @@ for circuit in circuitList:
             # Custom object to hold the job, circuit, and backend
             qj = QJob(job,circuit,name)
 
-
             # Append finished / ran job to list of jobs
             ranJobs.append(qj)
 
+
+        #print(qj.backend)
 
 
 correct = 0
@@ -437,6 +440,56 @@ for qjob in ranJobs:
                 else:
                         qjob.setIncorrect()
                         incorrect += 1
+
+        # Now we haev the stats finished, let's store them in a list based on their backend name
+        if qj.backend == "ibmqx2":
+                ibmqx2_ranJobs.append(qj)
+        elif qj.backend == "london":
+                london_ranJobs.append(qj)
+        elif qj.backend == "essex":
+                essex_ranJobs.append(qj)
+        elif qj.backend == "burlington":
+                burlington_ranJobs.append(qj)
+        elif qj.backend == "ourense":
+                ourense_ranJobs.apend(qj)
+        elif qj.backend == "vigo":
+                vigo_ranJobs.append(qj)
+        elif qj.backend == "ibmq_sim":
+                ibmq_sim_ranJobs.append(qj)
+        elif qj.backend == "melbourne":
+                melbourne_ranJobs.append(qj)
+        elif qj.backend == "local_sim":
+                local_sim_ranJobs.append(qj)
+        else:
+                continue
+
+total_correct = 0        
+total_incorrect = 0        
+total = 0
+
+qb5 = ["ibmqx2", "vigo", "ourense", "london", "essex", "burlington"]
+qb14 = ["melbourne"]
+sims = ["local_sim", "ibmq_sim"]
+
+for job in ibmqx2_ranJobs:
+#for job in local_sim_ranJobs:
+    total_correct += job.correct
+    total_incorrect += job.incorrect
+    total = total_correct + total_incorrect
+
+pcorrect = 100*(total_correct / total)
+if correct == total:
+    pincorrect = 0.0
+else:
+    pincorrect = 100*(total_incorrect / total)
+
+print("\n===== RESULTS - local_sim =====\n")
+print("Total Results: " + str(total))
+print("Total Correct Results: " + str(total_correct) + " -- " + str(pcorrect) + "%") 
+#print("Total Correct Results: " + str(total_correct)) 
+print("Total Inorrect Results: " + str(total_incorrect) + " -- " + str(pincorrect) + "%")
+#print("Total Inorrect Results: " + str(total_incorrect))
+print("\n===================\n")
 
 """
 Move this to new method

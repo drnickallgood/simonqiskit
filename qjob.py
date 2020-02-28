@@ -4,7 +4,7 @@ class QJob:
     Enhanced quantum circuit to hold backend information and other potential useful reporting parameters
     """
         
-    def __init__(self, job, circuit, backend,correct=None,incorrect=None):
+    def __init__(self, job, circuit, backend,correct=0,incorrect=0):
         self.job = job
         self.circuit = circuit
         self.backend = backend
