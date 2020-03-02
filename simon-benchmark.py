@@ -194,10 +194,14 @@ def verify_string(ostr, pstr):
 # We omit 00 as it's a trivial answer/solution
 
 period_strings_5qubit = list()
+
+#2-bit strings
 s0 = "00"
 s1 = "01"
 s2 = "10"
 s3 = "11"
+
+#3-bits trings
 s4 = "000"
 s5 = "001"
 s6 = "010"
@@ -207,7 +211,7 @@ s9 = "101"
 s10 = "110"
 s11 = "111"
 
-
+#4-bit strings
 s12 = "0000"
 s13 = "0001"
 s14 = "0010"
@@ -225,7 +229,7 @@ s25 = "1101"
 s26 = "1110"
 s27 = "1111"
 
-
+# 5-bit strings
 s28 = "10000"
 s29 = "10001"
 s30 = "10010"
@@ -243,56 +247,166 @@ s41 = "11101"
 s42 = "11110"
 s43 = "11111"
 
+# 6-bit strings
+s44 = "100000"
+s45 = "100001"
+s46 = "100010"
+s47 = "100011"
+s48 = "100100"
+s49 = "100101"
+s50 = "100110"
+s51 = "100111"
+s52 = "101000"
+s53 = "101001"
+s54 = "101010"
+s55 = "101011"
+s56 = "101100"
+s57 = "101101"
+s58 = "101110"
+s59 = "101111"
+s60 = "110000"
+s61 = "110001"
+s62 = "110010"
+s63 = "110011"
+s64 = "110100"
+s65 = "110101"
+s66 = "110110"
+s67 = "110111"
+s68 = "111000"
+s69 = "111001"
+s70 = "111010"
+s71 = "111011"
+s72 = "111100"
+s73 = "111101"
+s74 = "111110"
+s75 = "111111"
 
+# 7-bit strings
+s76 = "1000000"
+s77 = "1000001"
+s78 = "1000010"
+s79 = "1000011"
+s80 = "1000100"
+s89 = "1000101"
+s90 = "1000110"
+s91 = "1000111"
+s92 = "1001000"
+s93 = "1001001"
+s94 = "1001010"
+s95 = "1001011"
+s96 = "1001100"
+s97 = "1001101"
+s98 = "1001110"
+s99 = "1001111"
+s100 = "1010000"
+s101 = "1010001"
+s102 = "1010010"
+s103 = "1010011"
+s104 = "1010100"
+s105 = "1010101"
+s106 = "1010110"
+s106 = "1010111"
+s107 = "1011000"
+s108 = "1011001"
+s109 = "1011010"
+s110 = "1011011"
+s111 = "1011100"
+s112 = "1011101"
+s113 = "1011110"
+s114 = "1011111"
+s115 = "1100000"
+s116 = "1100001"
+s117 = "1100011"
+s118 = "1100100"
+s119 = "1100101"
+s120 = "1100110"
+s121 = "1100111"
+s122 = "1101000"
+s123 = "1101001"
+s124 = "1101010"
+s125 = "1101011"
+s126 = "1101100"
+s127 = "1101101"
+s128 = "1101110"
+s129 = "1101111"
+s130 = "1110000"
+s131 = "1110001"
+s132 = "1110010"
+s133 = "1110011"
+s134 = "1110100"
+s135 = "1110101"
+s136 = "1110110"
+s137 = "1110111"
+s138 = "1111000"
+s138 = "1111001"
+s139 = "1111010"
+s140 = "1111011"
+s141 = "1111100"
+s142 = "1111101"
+s143 = "1111110"
+s144 = "1111111"
+
+
+
+# 5-qubit strings
 period_strings_5qubit.append(s0)
 period_strings_5qubit.append(s1)
 period_strings_5qubit.append(s2)
 period_strings_5qubit.append(s3)
 
-"""
-period_strings_5qubit.append(s4)
-period_strings_5qubit.append(s5)
-period_strings_5qubit.append(s6)
-period_strings_5qubit.append(s7)
-period_strings_5qubit.append(s8)
-period_strings_5qubit.append(s9)
-period_strings_5qubit.append(s10)
-period_strings_5qubit.append(s11)
+# 14-qubit strings, perhaps we can do 7 bit strings?
+period_strings_14qubit = list()
 
-period_strings_5qubit.append(s12)
-period_strings_5qubit.append(s13)
-period_strings_5qubit.append(s14)
-period_strings_5qubit.append(s15)
-period_strings_5qubit.append(s16)
-period_strings_5qubit.append(s17)
-period_strings_5qubit.append(s18)
-period_strings_5qubit.append(s19)
-period_strings_5qubit.append(s20)
-period_strings_5qubit.append(s21)
-period_strings_5qubit.append(s22)
-period_strings_5qubit.append(s23)
-period_strings_5qubit.append(s24)
-period_strings_5qubit.append(s25)
-period_strings_5qubit.append(s26)
-period_strings_5qubit.append(s27)
+period_strings_14qubit.append(s0)
+period_strings_14qubit.append(s1)
+period_strings_14qubit.append(s2)
+period_strings_14qubit.append(s3)
 
-period_strings_5qubit.append(s28)
-period_strings_5qubit.append(s29)
-period_strings_5qubit.append(s30)
-period_strings_5qubit.append(s31)
-period_strings_5qubit.append(s32)
-period_strings_5qubit.append(s33)
-period_strings_5qubit.append(s34)
-period_strings_5qubit.append(s35)
-period_strings_5qubit.append(s36)
-period_strings_5qubit.append(s37)
-period_strings_5qubit.append(s38)
-period_strings_5qubit.append(s39)
-period_strings_5qubit.append(s40)
-period_strings_5qubit.append(s41)
-period_strings_5qubit.append(s42)
-period_strings_5qubit.append(s43)
-"""
+period_strings_14qubit.append(s4)
+period_strings_14qubit.append(s5)
+period_strings_14qubit.append(s6)
+period_strings_14qubit.append(s7)
+period_strings_14qubit.append(s8)
+period_strings_14qubit.append(s9)
+period_strings_14qubit.append(s10)
+period_strings_14qubit.append(s11)
+
+period_strings_14qubit.append(s12)
+period_strings_14qubit.append(s13)
+period_strings_14qubit.append(s14)
+period_strings_14qubit.append(s15)
+period_strings_14qubit.append(s16)
+period_strings_14qubit.append(s17)
+period_strings_14qubit.append(s18)
+period_strings_14qubit.append(s19)
+period_strings_14qubit.append(s20)
+period_strings_14qubit.append(s21)
+period_strings_14qubit.append(s22)
+period_strings_14qubit.append(s23)
+period_strings_14qubit.append(s24)
+period_strings_14qubit.append(s25)
+period_strings_14qubit.append(s26)
+period_strings_14qubit.append(s27)
+
+period_strings_14qubit.append(s28)
+period_strings_14qubit.append(s29)
+period_strings_14qubit.append(s30)
+period_strings_14qubit.append(s31)
+period_strings_14qubit.append(s32)
+period_strings_14qubit.append(s33)
+period_strings_14qubit.append(s34)
+period_strings_14qubit.append(s35)
+period_strings_14qubit.append(s36)
+period_strings_14qubit.append(s37)
+period_strings_14qubit.append(s38)
+period_strings_14qubit.append(s39)
+period_strings_14qubit.append(s40)
+period_strings_14qubit.append(s41)
+period_strings_14qubit.append(s42)
+period_strings_14qubit.append(s43)
+
+
+
 
 # IBM Q stuff..
 IBMQ.load_account()
@@ -321,11 +435,11 @@ backend_list = dict()
 #backend_list['local_sim'] = local_sim
 
 backend_list['ibmqx2'] = ibmqx2
-#backend_list['london'] = london
-#backend_list['essex'] = essex
-#backend_list['burlington'] = burlington
-#backend_list['ourense'] = ourense
-#backend_list['vigo'] = vigo
+backend_list['london'] = london
+backend_list['essex'] = essex
+backend_list['burlington'] = burlington
+backend_list['ourense'] = ourense
+backend_list['vigo'] = vigo
 
 
 # Make Circuits for all period strings!
@@ -373,44 +487,22 @@ vigo_ranJobs = list()
 ibmq_sim_ranJobs = list()
 melbourne_ranJobs = list()
 
-'''
-I think we need to .. get all the job's associated to the backend and organize them
-create a list for each backend's completed jobs (qjobs)
-run through this list, and then verify the string, and update each object with correct vs incorrect
-Total correct for each backend
-total incorrect for each bakend
-'''
 
-        
-
-
-print("===== SENDING DATA TO IBMQ BACKENDS... =====\n")    
+print("\n===== SENDING DATA TO IBMQ BACKENDS... =====\n")    
 ranJobs = list() 
 
-for circuit in circuitList:
+for name in backend_list:
+    for circuit in circuitList:
+        job = execute(circuit,backend=backend_list[name], shots=1024)
+        print("Running job on backend: " + name)
+        job_monitor(job,interval=5)
+        # Custom object to hold the job, circuit, and backend
+        qj = QJob(job,circuit,name)
 
-        # Send all circuits to all backends
-        # name -> backend object
-        for name in backend_list:
-            #results = run_circuit(circuit,backend)
-            # Put circuit in enhanced QJob class, and execute / return Job
-                        # default 1024 shots
-            job = execute(circuit,backend=backend_list[name],shots=1024)
-            print("Running job on backend: " + name)
-            job_monitor(job,interval=5)
-            
-            # Custom object to hold the job, circuit, and backend
-            qj = QJob(job,circuit,name)
+        #print(qj.backend())
+        # Append finished / ran job to list of jobs
+        ranJobs.append(qj)
 
-            # Append finished / ran job to list of jobs
-            ranJobs.append(qj)
-
-
-        #print(qj.backend)
-
-
-correct = 0
-incorrect = 0
 
 for qjob in ranJobs:
         # Results from each job
@@ -436,78 +528,93 @@ for qjob in ranJobs:
                 # Remember to re-reverse string so it's back to normal due to IBMQ Endianness
                 if verify_string(o,pstr):
                         qjob.setCorrect()
-                        correct += 1
                 else:
                         qjob.setIncorrect()
-                        incorrect += 1
 
         # Now we haev the stats finished, let's store them in a list based on their backend name
-        if qj.backend == "ibmqx2":
-                ibmqx2_ranJobs.append(qj)
-        elif qj.backend == "london":
-                london_ranJobs.append(qj)
-        elif qj.backend == "essex":
-                essex_ranJobs.append(qj)
-        elif qj.backend == "burlington":
-                burlington_ranJobs.append(qj)
-        elif qj.backend == "ourense":
-                ourense_ranJobs.apend(qj)
-        elif qj.backend == "vigo":
-                vigo_ranJobs.append(qj)
-        elif qj.backend == "ibmq_sim":
-                ibmq_sim_ranJobs.append(qj)
-        elif qj.backend == "melbourne":
-                melbourne_ranJobs.append(qj)
-        elif qj.backend == "local_sim":
-                local_sim_ranJobs.append(qj)
+        if qjob.backend() == "ibmqx2":
+                ibmqx2_ranJobs.append(qjob)
+        elif qjob.backend() == "london":
+                london_ranJobs.append(qjob)
+        elif qjob.backend() == "essex":
+                essex_ranJobs.append(qjob)
+        elif qjob.backend() == "burlington":
+                burlington_ranJobs.append(qjob)
+        elif qjob.backend() == "ourense":
+                ourense_ranJobs.append(qjob)
+        elif qjob.backend() == "vigo":
+                vigo_ranJobs.append(qjob)
+        elif qjob.backend() == "ibmq_sim":
+                ibmq_sim_ranJobs.append(qjob)
+        elif qjob.backend() == "melbourne":
+                melbourne_ranJobs.append(qjob)
+        elif qjob.backend() == "local_sim":
+                local_sim_ranJobs.append(qjob)
         else:
                 continue
 
-total_correct = 0        
-total_incorrect = 0        
-total = 0
 
-qb5 = ["ibmqx2", "vigo", "ourense", "london", "essex", "burlington"]
-qb14 = ["melbourne"]
-sims = ["local_sim", "ibmq_sim"]
 
-for job in ibmqx2_ranJobs:
-#for job in local_sim_ranJobs:
-    total_correct += job.correct
-    total_incorrect += job.incorrect
-    total = total_correct + total_incorrect
+backends_5qubit_ranJobs = dict()
+backends_14qubit_ranJobs = dict()
+backends_sims_ranJobs = dict()
 
-pcorrect = 100*(total_correct / total)
-if correct == total:
+q5b = ["ibmqx2", "vigo", "ourense", "london", "essex", "burlington"]
+#q5b = ["ibmqx2", "vigo"]
+q14b = ["melbourne"]
+sims = ["local_sim"]
+
+backends_5qubit_ranJobs['ibmqx2'] = ibmqx2_ranJobs
+backends_5qubit_ranJobs['vigo'] = vigo_ranJobs
+backends_5qubit_ranJobs['ourense'] = ourense_ranJobs
+backends_5qubit_ranJobs['london'] = london_ranJobs
+backends_5qubit_ranJobs['essex'] = essex_ranJobs
+backends_5qubit_ranJobs['burlington'] = burlington_ranJobs
+backends_14qubit_ranJobs['melbourne'] = melbourne_ranJobs
+
+backends_sims_ranJobs['local_sim'] = local_sim_ranJobs
+#backends_sims['ibmq_sim'] = ibmq_sim_ranJobs
+
+# The idea here is to loop through the dictionary by using a name in the list of names above
+# as such then, we can call dictionaries in a loop with that name, which contain the list of
+# ran jobs
+def printStats(backend, job_list):
+    '''
+    backend: backend name
+    job_list: list of ran jobs from backend
+
+    '''
+
+    total_correct = 0
+    total_incorrect = 0
+    total = 0
+    pcorrect = 0.0
     pincorrect = 0.0
-else:
-    pincorrect = 100*(total_incorrect / total)
 
-print("\n===== RESULTS - local_sim =====\n")
-print("Total Results: " + str(total))
-print("Total Correct Results: " + str(total_correct) + " -- " + str(pcorrect) + "%") 
-#print("Total Correct Results: " + str(total_correct)) 
-print("Total Inorrect Results: " + str(total_incorrect) + " -- " + str(pincorrect) + "%")
-#print("Total Inorrect Results: " + str(total_incorrect))
-print("\n===================\n")
+    for job in job_list:
+        total_correct += job.correct
+        total_incorrect += job.incorrect
+        total = total_correct + total_incorrect
+        pcorrect = 100*(total_correct / total)
+        if total_correct == total:
+            pincorrect = 0.0
+        else:
+            pincorrect = 100*(total_incorrect / total)
 
-"""
-Move this to new method
 
-total = correct + incorrect
-pcorrect = 100*(correct / total)
+    print("\n===== RESULTS - " + backend + " =====\n")
+    print("Total Results: " + str(total))
+    print("Total Correct Results: " + str(total_correct) + " -- " + str(pcorrect) + "%") 
+    print("Total Inorrect Results: " + str(total_incorrect) + " -- " + str(pincorrect) + "%")
+    print("\n===================\n")
 
-# Fix divide by 0 for simulation, since simulations should never have incorrect results
-# Due to no quantum noise
-if correct == total:
-    pincorrect = 0
-else:
-    pincorrect = 100*(incorrect / total)
+# for each backend name in the backend name list...
+for backend in q5b:
+    printStats(backend, backends_5qubit_ranJobs[backend])
 
-print("\n===== RESULTS =====\n")
-print("Total Results: " + str(total))
-print("Total Correct Results: " + str(correct) + " -- " + str(pcorrect) + "%") 
-print("Total Inorrect Results: " + str(incorrect) + " -- " + str(pincorrect) + "%")
-print("\n===================\n")
-"""
-        
+
+
+
+
+
+
