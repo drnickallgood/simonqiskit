@@ -122,8 +122,8 @@ qprovider = IBMQ.get_provider(hub='ibm-q')
 
 #qprovider.backends()
 # Get the least busy backend
-#qbackend = least_busy(qprovider.backends(filters=lambda x: x.configuration().n_qubits == 5 and not x.configuration().simulator and x.status().operational==True))
-qbackend = local_sim
+qbackend = least_busy(qprovider.backends(filters=lambda x: x.configuration().n_qubits == 5 and not x.configuration().simulator and x.status().operational==True))
+#qbackend = local_sim
 #print("least busy backend: ", qbackend)
 
 #qbackend = qprovider.get_backend('ibmq_vigo')
@@ -238,6 +238,8 @@ print("======================================\n")
 # Print out list of items
 for i in sorted_x:
     print(i)
+    print(str(type(i)))
+
 #print(sorted_x)
 print("")
 # Now once we have our found string, we need to double-check by XOR back to the
