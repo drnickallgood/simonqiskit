@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import operator
 #from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute, IBMQ
+from qiskit.providers.ibmq import least_busy
 
 # AER is for simulators
 from qiskit import Aer
@@ -431,7 +432,15 @@ burlington = provider.get_backend('ibmq_burlington')
 ourense = provider.get_backend('ibmq_ourense')
 vigo = provider.get_backend('ibmq_vigo')
 
-# 32 qubit qasm simulator
+#least = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits == 5 and not x.configuration().simulator and x.status().operational==True))
+
+#Nam comes back as ibmq_backend, get the part after ibmq
+#least_name = least.name().split('_')[1]
+
+#print("Least busy backend: " + least_name)
+
+
+# 32 qubit qasm simulator - IBMQ
 ibmq_sim = provider.get_backend('ibmq_qasm_simulator')
 
 # Local Simulator, 
@@ -443,12 +452,16 @@ backend_list = dict()
 #backend_list['local_sim'] = local_sim
 
 backend_list['ibmqx2'] = ibmqx2
-#backend_list['london'] = london
-#backend_list['essex'] = essex
-#backend_list['burlington'] = burlington
-#backend_list['ourense'] = ourense
-#backend_list['melbourne'] = melbourne 
+backend_list['london'] = london
+backend_list['essex'] = essex
+backend_list['burlington'] = burlington
+backend_list['ourense'] = ourense
+backend_list['melbourne'] = melbourne 
 backend_list['vigo'] = vigo
+
+# Least busy backend, for individual testing
+#backend_list[least_name] = least
+
 
 
 # Make Circuits for all period strings!
@@ -528,6 +541,7 @@ for qjob in ranJobs:
 
 		#list of observed strings
 		obs_strings = list()
+		str_counts = 0
 	
 		# Sorted strings from each job
 		sorted_str = sorted(results.get_counts().items(), key=operator.itemgetter(1), reverse=True)
@@ -540,21 +554,26 @@ for qjob in ranJobs:
 		for o in obs_strings:
 				# Remember to re-reverse string so it's back to normal due to IBMQ Endianness
 				if verify_string(o,pstr):
-						#qjob.setCorrect()
-						continue
+						for string, count in counts.items():
+							if string == o:
+								#print("===== SET CORRECT =====")
+								qjob.setCorrect(count)		
 				else:
 						# lookup counts based on string
-						if o == counts[0]:
-							str_counts = counts[1]
-
-						# Add value to incorrect holder in object
-						qjob.setIncorrect(str_counts)
+						# counts is a dict()
+						for string, count in counts.items():
+							if string == o:
+								# Add value to incorrect holder in object
+								#print("===== SET INCORRECT =====")
+								qjob.setIncorrect(count)
 
 		# Now we haev the stats finished, let's store them in a list based on their backend name
 		if qjob.backend() == "ibmqx2":
 				ibmqx2_ranJobs.append(qjob)
 		elif qjob.backend() == "london":
 				london_ranJobs.append(qjob)
+		elif qjob.backend() == "burlington":
+				burlington_ranJobs.append(qjob)
 		elif qjob.backend() == "essex":
 				burlington_ranJobs.append(qjob)
 		elif qjob.backend() == "ourense":
@@ -576,11 +595,13 @@ backends_5qubit_ranJobs = dict()
 backends_14qubit_ranJobs = dict()
 backends_sims_ranJobs = dict()
 
-#q5b = ["ibmqx2", "vigo", "ourense", "london", "essex", "burlington"]
-q5b = ["ibmqx2", "vigo"]
+q5b = ["ibmqx2", "vigo", "ourense", "london", "essex", "burlington"]
+#q5b = ["ibmqx2", "vigo"]
+#q5b = ["london", "burlington"]
+
 q14b = ["melbourne"]
 sims = ["local_sim"]
-#sims = ["local_sim", "ibmq_SIM"]
+#sims = ["local_sim", "ibmq_sim"]
 
 backends_5qubit_ranJobs['ibmqx2'] = ibmqx2_ranJobs
 backends_5qubit_ranJobs['vigo'] = vigo_ranJobs
@@ -607,20 +628,27 @@ def printStats(backend, job_list):
 	total_incorrect = 0
 
 	# Total = shots = repeitions of circuit
-	total = 1024
+
+	# 1024 x 4 period strings we can use with 2-qubit = 4096
+	# Probably make this dynamic for 14-qubit
+	total = 4096
 	pcorrect = 0.00
 	pincorrect = 0.00
 
+	# Go through each job/period string's data 
 	for job in job_list:
 		total_correct += job.getCorrect()
+		#print("Total Correct inc: " + str(total_correct))
 		total_incorrect += job.getIncorrect()
-		total = total_correct + total_incorrect
-		pcorrect = 100*(total_correct / total)
-		if total_correct == total:
-			pincorrect = 0.0000
-		else:
-			pincorrect = 100*(total_incorrect / total)
+		#print("Total INCorrect inc: " + str(total_incorrect))
 
+	# This is to handle when we use a simiulator, nothing should be incorrect to avoid dividing by 0
+	if total_incorrect == 0:
+		pincorrect = 0.00
+	else:
+		pincorrect = 100*(total_incorrect / total)
+
+	pcorrect = 100*(total_correct / total)
 
 	print("\n===== RESULTS - " + backend + " =====\n")
 	print("Total Results: " + str(total))
@@ -642,16 +670,21 @@ for q in vigo_ranJobs:
 '''
 
 
+'''
+for backend in sims:
+	printStats(backend, backends_sims_ranJobs[backend])
+'''
+
+#printStats(least_name, backends_5qubit_ranJobs[least_name])
+
 # for each backend name in the backend name list...
 for backend in q5b:
 	printStats(backend, backends_5qubit_ranJobs[backend])
 
 
 # 14-qubit backend
-'''
 for backend in q14b:
 	printStats(backend, backends_14qubit_ranJobs[backend])
-'''
 
 
 

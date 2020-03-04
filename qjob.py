@@ -12,7 +12,7 @@ class QJob:
 		# of shots
 		self.total = total
 		self.incorrect = 0
-		self.correct = self.total - self.incorrect
+		self.correct = 0
 		
 	# Returns string of backend name
 	def backend(self):
@@ -26,13 +26,12 @@ class QJob:
 	def job(self):
 		return self.job
 
-	'''
 	def setCorrect(self, value):
 		self.correct += value
-	'''
 
 	def setIncorrect(self, value):
 		self.incorrect += value
+		#self.correct = self.total - self.incorrect
 
 	def getCorrect(self):
 		return self.correct

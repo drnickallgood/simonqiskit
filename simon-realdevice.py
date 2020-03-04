@@ -2,7 +2,7 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import operator
-
+from qiskit.providers.ibmq import least_busy
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute,Aer, IBMQ
 #from qiskit.providers.ibmq.managed import IBMQJobManager
 from qiskit.tools.visualization import plot_histogram
@@ -123,6 +123,11 @@ qprovider = IBMQ.get_provider(hub='ibm-q')
 #qprovider.backends()
 # Get the least busy backend
 qbackend = least_busy(qprovider.backends(filters=lambda x: x.configuration().n_qubits == 5 and not x.configuration().simulator and x.status().operational==True))
+
+backend_name = qbackend.name()
+
+print(backend_name)
+
 #qbackend = local_sim
 #print("least busy backend: ", qbackend)
 
