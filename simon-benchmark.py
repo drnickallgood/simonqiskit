@@ -296,64 +296,64 @@ s77 = "1000001"
 s78 = "1000010"
 s79 = "1000011"
 s80 = "1000100"
-s89 = "1000101"
-s90 = "1000110"
-s91 = "1000111"
-s92 = "1001000"
-s93 = "1001001"
-s94 = "1001010"
-s95 = "1001011"
-s96 = "1001100"
-s97 = "1001101"
-s98 = "1001110"
-s99 = "1001111"
-s100 = "1010000"
-s101 = "1010001"
-s102 = "1010010"
-s103 = "1010011"
-s104 = "1010100"
-s105 = "1010101"
-s106 = "1010110"
-s106 = "1010111"
-s107 = "1011000"
-s108 = "1011001"
-s109 = "1011010"
-s110 = "1011011"
-s111 = "1011100"
-s112 = "1011101"
-s113 = "1011110"
-s114 = "1011111"
-s115 = "1100000"
-s116 = "1100001"
-s117 = "1100011"
-s118 = "1100100"
-s119 = "1100101"
-s120 = "1100110"
-s121 = "1100111"
-s122 = "1101000"
-s123 = "1101001"
-s124 = "1101010"
-s125 = "1101011"
-s126 = "1101100"
-s127 = "1101101"
-s128 = "1101110"
-s129 = "1101111"
-s130 = "1110000"
-s131 = "1110001"
-s132 = "1110010"
-s133 = "1110011"
-s134 = "1110100"
-s135 = "1110101"
-s136 = "1110110"
-s137 = "1110111"
-s138 = "1111000"
-s138 = "1111001"
-s139 = "1111010"
-s140 = "1111011"
-s141 = "1111100"
-s142 = "1111101"
-s143 = "1111110"
-s144 = "1111111"
+s81 = "1000101"
+s82 = "1000110"
+s83 = "1000111"
+s84 = "1001000"
+s85 = "1001001"
+s86 = "1001010"
+s87 = "1001011"
+s88 = "1001100"
+s89 = "1001101"
+s90 = "1001110"
+s91 = "1001111"
+s92 = "1010000"
+s93 = "1010001"
+s94 = "1010010"
+s95 = "1010011"
+s96 = "1010100"
+s97 = "1010101"
+s98 = "1010110"
+s99 = "1010111"
+s100 = "1011000"
+s101 = "1011001"
+s102 = "1011010"
+s103 = "1011011"
+s104 = "1011100"
+s105 = "1011101"
+s106 = "1011110"
+s107 = "1011111"
+s108 = "1100000"
+s109 = "1100001"
+s110 = "1100011"
+s111 = "1100100"
+s112 = "1100101"
+s113 = "1100110"
+s114 = "1100111"
+s115 = "1101000"
+s116 = "1101001"
+s117 = "1101010"
+s118 = "1101011"
+s119 = "1101100"
+s120 = "1101101"
+s121 = "1101110"
+s122 = "1101111"
+s123 = "1110000"
+s124 = "1110001"
+s125 = "1110010"
+s126 = "1110011"
+s127 = "1110100"
+s128 = "1110101"
+s129 = "1110110"
+s130 = "1110111"
+s131 = "1111000"
+s132 = "1111001"
+s133 = "1111010"
+s134 = "1111011"
+s135 = "1111100"
+s136 = "1111101"
+s137 = "1111110"
+s138 = "1111111"
 
 
 
@@ -366,11 +366,13 @@ period_strings_5qubit.append(s3)
 # 14-qubit strings, perhaps we can do 7 bit strings?
 period_strings_14qubit = list()
 
+#2 -bit strings
 period_strings_14qubit.append(s0)
 period_strings_14qubit.append(s1)
 period_strings_14qubit.append(s2)
 period_strings_14qubit.append(s3)
 
+# 3-bit strings
 period_strings_14qubit.append(s4)
 period_strings_14qubit.append(s5)
 period_strings_14qubit.append(s6)
@@ -380,6 +382,7 @@ period_strings_14qubit.append(s9)
 period_strings_14qubit.append(s10)
 period_strings_14qubit.append(s11)
 
+# 4-bit strings
 period_strings_14qubit.append(s12)
 period_strings_14qubit.append(s13)
 period_strings_14qubit.append(s14)
@@ -396,6 +399,8 @@ period_strings_14qubit.append(s24)
 period_strings_14qubit.append(s25)
 period_strings_14qubit.append(s26)
 period_strings_14qubit.append(s27)
+
+# 5-bit strings
 
 period_strings_14qubit.append(s28)
 period_strings_14qubit.append(s29)
@@ -414,7 +419,106 @@ period_strings_14qubit.append(s41)
 period_strings_14qubit.append(s42)
 period_strings_14qubit.append(s43)
 
+#6-bit strings
 
+period_strings_14qubit.append(s44)
+period_strings_14qubit.append(s45)
+period_strings_14qubit.append(s46)
+period_strings_14qubit.append(s47)
+period_strings_14qubit.append(s48)
+period_strings_14qubit.append(s49)
+period_strings_14qubit.append(s50)
+period_strings_14qubit.append(s51)
+period_strings_14qubit.append(s52)
+period_strings_14qubit.append(s53)
+period_strings_14qubit.append(s54)
+period_strings_14qubit.append(s55)
+period_strings_14qubit.append(s56)
+period_strings_14qubit.append(s57)
+period_strings_14qubit.append(s58)
+period_strings_14qubit.append(s59)
+period_strings_14qubit.append(s60)
+period_strings_14qubit.append(s61)
+period_strings_14qubit.append(s62)
+period_strings_14qubit.append(s63)
+period_strings_14qubit.append(s64)
+period_strings_14qubit.append(s65)
+period_strings_14qubit.append(s66)
+period_strings_14qubit.append(s67)
+period_strings_14qubit.append(s68)
+period_strings_14qubit.append(s69)
+period_strings_14qubit.append(s70)
+period_strings_14qubit.append(s71)
+period_strings_14qubit.append(s72)
+period_strings_14qubit.append(s73)
+period_strings_14qubit.append(s74)
+period_strings_14qubit.append(s75)
+
+# 7-bit strings
+
+period_strings_14qubit.append(s76)
+period_strings_14qubit.append(s77)
+period_strings_14qubit.append(s78)
+period_strings_14qubit.append(s79)
+period_strings_14qubit.append(s80)
+period_strings_14qubit.append(s81)
+period_strings_14qubit.append(s82)
+period_strings_14qubit.append(s83)
+period_strings_14qubit.append(s84)
+period_strings_14qubit.append(s85)
+period_strings_14qubit.append(s86)
+period_strings_14qubit.append(s87)
+period_strings_14qubit.append(s88)
+period_strings_14qubit.append(s89)
+period_strings_14qubit.append(s90)
+period_strings_14qubit.append(s91)
+period_strings_14qubit.append(s92)
+period_strings_14qubit.append(s93)
+period_strings_14qubit.append(s94)
+period_strings_14qubit.append(s95)
+period_strings_14qubit.append(s96)
+period_strings_14qubit.append(s97)
+period_strings_14qubit.append(s98)
+period_strings_14qubit.append(s99)
+period_strings_14qubit.append(s100)
+period_strings_14qubit.append(s101)
+period_strings_14qubit.append(s102)
+period_strings_14qubit.append(s103)
+period_strings_14qubit.append(s104)
+period_strings_14qubit.append(s105)
+period_strings_14qubit.append(s106)
+period_strings_14qubit.append(s107)
+period_strings_14qubit.append(s108)
+period_strings_14qubit.append(s109)
+period_strings_14qubit.append(s110)
+period_strings_14qubit.append(s111)
+period_strings_14qubit.append(s112)
+period_strings_14qubit.append(s113)
+period_strings_14qubit.append(s114)
+period_strings_14qubit.append(s115)
+period_strings_14qubit.append(s116)
+period_strings_14qubit.append(s117)
+period_strings_14qubit.append(s118)
+period_strings_14qubit.append(s119)
+period_strings_14qubit.append(s120)
+period_strings_14qubit.append(s121)
+period_strings_14qubit.append(s122)
+period_strings_14qubit.append(s123)
+period_strings_14qubit.append(s124)
+period_strings_14qubit.append(s125)
+period_strings_14qubit.append(s126)
+period_strings_14qubit.append(s127)
+period_strings_14qubit.append(s128)
+period_strings_14qubit.append(s129)
+period_strings_14qubit.append(s130)
+period_strings_14qubit.append(s131)
+period_strings_14qubit.append(s132)
+period_strings_14qubit.append(s133)
+period_strings_14qubit.append(s134)
+period_strings_14qubit.append(s135)
+period_strings_14qubit.append(s136)
+period_strings_14qubit.append(s137)
+period_strings_14qubit.append(s138)
 
 
 # IBM Q stuff..
@@ -451,13 +555,16 @@ circuitList = list()
 backend_list = dict()
 #backend_list['local_sim'] = local_sim
 
-backend_list['ibmqx2'] = ibmqx2
-backend_list['london'] = london
-backend_list['essex'] = essex
-backend_list['burlington'] = burlington
-backend_list['ourense'] = ourense
+#backend_list['ibmqx2'] = ibmqx2
+#backend_list['london'] = london
+#backend_list['essex'] = essex
+#backend_list['burlington'] = burlington
+#backend_list['ourense'] = ourense
 backend_list['melbourne'] = melbourne 
-backend_list['vigo'] = vigo
+#backend_list['vigo'] = vigo
+
+
+#backend14q_list['melbourne'] = melbourne 
 
 # Least busy backend, for individual testing
 #backend_list[least_name] = least
@@ -465,7 +572,8 @@ backend_list['vigo'] = vigo
 
 
 # Make Circuits for all period strings!
-for p in period_strings_5qubit:
+#for p in period_strings_5qubit:
+for p in period_strings_14qubit:
 
 		# Circuit name = Simon_+ period string
 	#circuitName = "Simon-" + p
@@ -513,10 +621,15 @@ melbourne_ranJobs = list()
 print("\n===== SENDING DATA TO IBMQ BACKENDS... =====\n")	 
 ranJobs = list() 
 
+jcount = 1
+jtotal = 139
 for name in backend_list:
 	for circuit in circuitList:
 		job = execute(circuit,backend=backend_list[name], shots=1024)
+		# Keep tabs on running jobs
 		print("Running job on backend: " + name)
+		print("Running job:  " + str(jcount) + "/" + str(jtotal))
+		jcount += 1
 		job_monitor(job,interval=5)
 		# Custom object to hold the job, circuit, and backend
 		qj = QJob(job,circuit,name)
@@ -575,7 +688,7 @@ for qjob in ranJobs:
 		elif qjob.backend() == "burlington":
 				burlington_ranJobs.append(qjob)
 		elif qjob.backend() == "essex":
-				burlington_ranJobs.append(qjob)
+				essex_ranJobs.append(qjob)
 		elif qjob.backend() == "ourense":
 				ourense_ranJobs.append(qjob)
 		elif qjob.backend() == "vigo":
@@ -595,11 +708,17 @@ backends_5qubit_ranJobs = dict()
 backends_14qubit_ranJobs = dict()
 backends_sims_ranJobs = dict()
 
-q5b = ["ibmqx2", "vigo", "ourense", "london", "essex", "burlington"]
-#q5b = ["ibmqx2", "vigo"]
-#q5b = ["london", "burlington"]
+#q5b = ["ibmqx2", "vigo", "ourense", "london", "essex", "burlington"]
+
+#q5b = ["ibmqx2"]
+#q5b = ["vigo"]
+#q5b = ["ourense"]
+#q5b = ["london"]
+q5b = ["essex"]
+#q5b = ["burlington"]
 
 q14b = ["melbourne"]
+
 sims = ["local_sim"]
 #sims = ["local_sim", "ibmq_sim"]
 
@@ -609,6 +728,7 @@ backends_5qubit_ranJobs['ourense'] = ourense_ranJobs
 backends_5qubit_ranJobs['london'] = london_ranJobs
 backends_5qubit_ranJobs['essex'] = essex_ranJobs
 backends_5qubit_ranJobs['burlington'] = burlington_ranJobs
+
 backends_14qubit_ranJobs['melbourne'] = melbourne_ranJobs
 
 backends_sims_ranJobs['local_sim'] = local_sim_ranJobs
@@ -631,7 +751,8 @@ def printStats(backend, job_list):
 
 	# 1024 x 4 period strings we can use with 2-qubit = 4096
 	# Probably make this dynamic for 14-qubit
-	total = 4096
+	# 2 - 7 qubits = 142336 total runs
+	total = 142336
 	pcorrect = 0.00
 	pincorrect = 0.00
 
@@ -658,19 +779,6 @@ def printStats(backend, job_list):
 
 
 '''
-print("\nIBMQX2 Results\n")
-for q in ibmqx2_ranJobs:
-	print("Correct: " + str(q.getCorrect()))
-	print("Incorrect: " + str(q.getIncorrect()))
-
-print("\nVIGO Results\n")
-for q in vigo_ranJobs:
-	print("Correct: " + str(q.getCorrect()))
-	print("Incorrect: " + str(q.getIncorrect()))
-'''
-
-
-'''
 for backend in sims:
 	printStats(backend, backends_sims_ranJobs[backend])
 '''
@@ -678,9 +786,11 @@ for backend in sims:
 #printStats(least_name, backends_5qubit_ranJobs[least_name])
 
 # for each backend name in the backend name list...
+
+'''
 for backend in q5b:
 	printStats(backend, backends_5qubit_ranJobs[backend])
-
+'''
 
 # 14-qubit backend
 for backend in q14b:
