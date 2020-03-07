@@ -1,0 +1,20 @@
+
+===== SENDING DATA TO IBMQ BACKENDS... =====
+
+Running job on backend: melbourne
+Job Status: job is being validatedJob Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Job Status: job is being validatedJob Status: job is queued (12)    Job Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Job Status: job is being validatedJob Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Job Status: job is being validatedJob Status: job is queued (13)    Job Status: job is queued (12)    Job Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+
+===== RESULTS - melbourne =====
+
+Total Results: 7168
+Total Correct Results: 3008 -- 41.964285714285715%
+Total Inorrect Results: 1088 -- 15.178571428571427%
+
+===================
+

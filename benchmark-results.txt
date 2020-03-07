@@ -1,0 +1,113 @@
+
+===== SENDING DATA TO IBMQ BACKENDS... =====
+
+Running job on backend: ibmqx2
+Job Status: job is being validatedJob Status: job is queued (39)    Job Status: job is queued (38)    Job Status: job is queued (37)    Job Status: job is queued (36)    Job Status: job is queued (35)    Job Status: job is queued (34)    Job Status: job is queued (33)    Job Status: job is queued (32)    Job Status: job is queued (31)    Job Status: job is queued (30)    Job Status: job is queued (29)    Job Status: job is queued (28)    Job Status: job is queued (27)    Job Status: job is queued (26)    Job Status: job is queued (25)    Job Status: job is queued (24)    Job Status: job is queued (23)    Job Status: job is queued (22)    Job Status: job is queued (21)    Job Status: job is queued (20)    Job Status: job is queued (19)    Job Status: job is queued (18)    Job Status: job is queued (17)    Job Status: job is queued (16)    Job Status: job is queued (15)    Job Status: job is queued (14)    Job Status: job is queued (13)    Job Status: job is queued (12)    Job Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: ibmqx2
+Job Status: job is being validatedJob Status: job is queued (42)    Job Status: job is queued (41)    Job Status: job is queued (40)    Job Status: job is queued (39)    Job Status: job is queued (38)    Job Status: job is queued (37)    Job Status: job is queued (36)    Job Status: job is queued (35)    Job Status: job is queued (34)    Job Status: job is queued (33)    Job Status: job is queued (32)    Job Status: job is queued (31)    Job Status: job is queued (30)    Job Status: job is queued (29)    Job Status: job is queued (28)    Job Status: job is queued (27)    Job Status: job is queued (26)    Job Status: job is queued (25)    Job Status: job is queued (24)    Job Status: job is queued (23)    Job Status: job is queued (22)    Job Status: job is queued (21)    Job Status: job is queued (20)    Job Status: job is queued (19)    Job Status: job is queued (18)    Job Status: job is queued (17)    Job Status: job is queued (16)    Job Status: job is queued (15)    Job Status: job is queued (14)    Job Status: job is queued (13)    Job Status: job is queued (12)    Job Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: ibmqx2
+Job Status: job is being validatedJob Status: job is queued (None)  Job Status: job is queued (44)    Job Status: job is queued (43)    Job Status: job is queued (42)    Job Status: job is queued (41)    Job Status: job is queued (40)    Job Status: job is queued (39)    Job Status: job is queued (38)    Job Status: job is queued (37)    Job Status: job is queued (36)    Job Status: job is queued (35)    Job Status: job is queued (34)    Job Status: job is queued (33)    Job Status: job is queued (32)    Job Status: job is queued (31)    Job Status: job is queued (30)    Job Status: job is queued (29)    Job Status: job is queued (28)    Job Status: job is queued (27)    Job Status: job is queued (26)    Job Status: job is queued (25)    Job Status: job is queued (24)    Job Status: job is queued (23)    Job Status: job is queued (22)    Job Status: job is queued (21)    Job Status: job is queued (20)    Job Status: job is queued (19)    Job Status: job is queued (18)    Job Status: job is queued (17)    Job Status: job is queued (16)    Job Status: job is queued (15)    Job Status: job is queued (14)    Job Status: job is queued (13)    Job Status: job is queued (12)    Job Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: ibmqx2
+Job Status: job is being validatedJob Status: job is queued (29)    Job Status: job is queued (28)    Job Status: job is queued (27)    Job Status: job is queued (26)    Job Status: job is queued (25)    Job Status: job is queued (24)    Job Status: job is queued (23)    Job Status: job is queued (22)    Job Status: job is queued (21)    Job Status: job is queued (20)    Job Status: job is queued (19)    Job Status: job is queued (18)    Job Status: job is queued (16)    Job Status: job is queued (15)    Job Status: job is queued (14)    Job Status: job is queued (13)    Job Status: job is queued (12)    Job Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: london
+Job Status: job is being validatedJob Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: london
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: london
+Job Status: job is being validatedJob Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: london
+Job Status: job is being validatedJob Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: essex
+Job Status: job is being validatedJob Status: job is queued (13)    Job Status: job is queued (12)    Job Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: essex
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: essex
+Job Status: job is being validatedJob Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: essex
+Job Status: job is being validatedJob Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: burlington
+Job Status: job is being validatedJob Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: burlington
+Job Status: job is being validatedJob Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: burlington
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: burlington
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: ourense
+Job Status: job is being validatedJob Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: ourense
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: ourense
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: ourense
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Job Status: job is being validatedJob Status: job is queued (19)    Job Status: job is queued (18)    Job Status: job is queued (17)    Job Status: job is queued (16)    Job Status: job is queued (15)    Job Status: job is queued (14)    Job Status: job is queued (13)    Job Status: job is queued (12)    Job Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Job Status: job is being validatedJob Status: job is queued (20)    Job Status: job is queued (19)    Job Status: job is queued (18)    Job Status: job is queued (17)    Job Status: job is queued (16)    Job Status: job is queued (15)    Job Status: job is queued (14)    Job Status: job is queued (13)    Job Status: job is queued (12)    Job Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Job Status: job is being validatedJob Status: job is queued (22)    Job Status: job is queued (21)    Job Status: job is queued (20)    Job Status: job is queued (19)    Job Status: job is queued (18)    Job Status: job is queued (17)    Job Status: job is queued (16)    Job Status: job is queued (15)    Job Status: job is queued (14)    Job Status: job is queued (13)    Job Status: job is queued (12)    Job Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Job Status: job is being validatedJob Status: job is queued (14)    Job Status: job is queued (13)    Job Status: job is queued (12)    Job Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: vigo
+Job Status: job is being validatedJob Status: job is queued (15)    Job Status: job is queued (14)    Job Status: job is queued (13)    Job Status: job is queued (12)    Job Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: vigo
+Job Status: job is being validatedJob Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: vigo
+Job Status: job is being validatedJob Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: vigo
+Job Status: job is being validatedJob Status: job is queued (11)    Job Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+
+===== RESULTS - ibmqx2 =====
+
+Total Results: 4096
+Total Correct Results: 3338 -- 81.494140625%
+Total Inorrect Results: 758 -- 18.505859375%
+
+===================
+
+
+===== RESULTS - vigo =====
+
+Total Results: 4096
+Total Correct Results: 3325 -- 81.1767578125%
+Total Inorrect Results: 771 -- 18.8232421875%
+
+===================
+
+
+===== RESULTS - ourense =====
+
+Total Results: 4096
+Total Correct Results: 3076 -- 75.09765625%
+Total Inorrect Results: 1020 -- 24.90234375%
+
+===================
+
+
+===== RESULTS - london =====
+
+Total Results: 4096
+Total Correct Results: 2537 -- 61.9384765625%
+Total Inorrect Results: 1559 -- 38.0615234375%
+
+===================
+
+
+===== RESULTS - essex =====
+
+Total Results: 4096
+Total Correct Results: 0 -- 0.0%
+Total Inorrect Results: 0 -- 0.0%
+
+===================
+
+
+===== RESULTS - burlington =====
+
+Total Results: 4096
+Total Correct Results: 6311 -- 154.0771484375%
+Total Inorrect Results: 1881 -- 45.9228515625%
+
+===================
+
