@@ -2,6 +2,7 @@ import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import operator
+import itertools
 #from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute, IBMQ
 from qiskit.providers.ibmq import least_busy
 
@@ -162,6 +163,16 @@ def print_list(results):
 		print("")
 
 
+## easily create period strings
+def create_period_str(strlen):
+	str_list = list()
+	for i in itertools.product([0,1],repeat=strlen):
+		#print("".join(map(str,i)))
+		str_list.append("".join(map(str,i)))
+
+	return str_list
+
+
 ## function to get dot product of result string with the period string to verify, result should be 0
 #check the wikipedia for simons formula 
 # DOT PRODUCT IS MOD 2 !!!!
@@ -202,326 +213,34 @@ def verify_string(ostr, pstr):
 
 #### START ####			
 # hidden stringsn
-# We omit 00 as it's a trivial answer/solution
 
 period_strings_5qubit = list()
+period_strings_5qubit = create_period_str(2)
 
-#2-bit strings
-s0 = "00"
-s1 = "01"
-s2 = "10"
-s3 = "11"
+period_strings_2bit = list()
+period_strings_3bit = list()
+period_strings_4bit = list()
+period_strings_5bit = list()
+period_strings_6bit = list()
+period_strings_7bit = list()
 
-#3-bits trings
-s4 = "000"
-s5 = "001"
-s6 = "010"
-s7 = "011"
-s8 = "100"
-s9 = "101"
-s10 = "110"
-s11 = "111"
-
-#4-bit strings
-s12 = "0000"
-s13 = "0001"
-s14 = "0010"
-s15 = "0011"
-s16 = "0100"
-s17 = "0101"
-s18 = "0110"
-s19 = "0111"
-s20 = "1000"
-s21 = "1001"
-s22 = "1010"
-s23 = "1011"
-s24 = "1100"
-s25 = "1101"
-s26 = "1110"
-s27 = "1111"
-
-# 5-bit strings
-s28 = "10000"
-s29 = "10001"
-s30 = "10010"
-s31 = "10011"
-s32 = "10100"
-s33 = "10101"
-s34 = "10110"
-s35 = "10111"
-s36 = "11000"
-s37 = "11001"
-s38 = "11010"
-s39 = "11011"
-s40 = "11100"
-s41 = "11101"
-s42 = "11110"
-s43 = "11111"
-
-# 6-bit strings
-s44 = "100000"
-s45 = "100001"
-s46 = "100010"
-s47 = "100011"
-s48 = "100100"
-s49 = "100101"
-s50 = "100110"
-s51 = "100111"
-s52 = "101000"
-s53 = "101001"
-s54 = "101010"
-s55 = "101011"
-s56 = "101100"
-s57 = "101101"
-s58 = "101110"
-s59 = "101111"
-s60 = "110000"
-s61 = "110001"
-s62 = "110010"
-s63 = "110011"
-s64 = "110100"
-s65 = "110101"
-s66 = "110110"
-s67 = "110111"
-s68 = "111000"
-s69 = "111001"
-s70 = "111010"
-s71 = "111011"
-s72 = "111100"
-s73 = "111101"
-s74 = "111110"
-s75 = "111111"
-
-# 7-bit strings
-s76 = "1000000"
-s77 = "1000001"
-s78 = "1000010"
-s79 = "1000011"
-s80 = "1000100"
-s81 = "1000101"
-s82 = "1000110"
-s83 = "1000111"
-s84 = "1001000"
-s85 = "1001001"
-s86 = "1001010"
-s87 = "1001011"
-s88 = "1001100"
-s89 = "1001101"
-s90 = "1001110"
-s91 = "1001111"
-s92 = "1010000"
-s93 = "1010001"
-s94 = "1010010"
-s95 = "1010011"
-s96 = "1010100"
-s97 = "1010101"
-s98 = "1010110"
-s99 = "1010111"
-s100 = "1011000"
-s101 = "1011001"
-s102 = "1011010"
-s103 = "1011011"
-s104 = "1011100"
-s105 = "1011101"
-s106 = "1011110"
-s107 = "1011111"
-s108 = "1100000"
-s109 = "1100001"
-s110 = "1100011"
-s111 = "1100100"
-s112 = "1100101"
-s113 = "1100110"
-s114 = "1100111"
-s115 = "1101000"
-s116 = "1101001"
-s117 = "1101010"
-s118 = "1101011"
-s119 = "1101100"
-s120 = "1101101"
-s121 = "1101110"
-s122 = "1101111"
-s123 = "1110000"
-s124 = "1110001"
-s125 = "1110010"
-s126 = "1110011"
-s127 = "1110100"
-s128 = "1110101"
-s129 = "1110110"
-s130 = "1110111"
-s131 = "1111000"
-s132 = "1111001"
-s133 = "1111010"
-s134 = "1111011"
-s135 = "1111100"
-s136 = "1111101"
-s137 = "1111110"
-s138 = "1111111"
-
-
-
-# 5-qubit strings
-period_strings_5qubit.append(s0)
-period_strings_5qubit.append(s1)
-period_strings_5qubit.append(s2)
-period_strings_5qubit.append(s3)
-
-# 14-qubit strings, perhaps we can do 7 bit strings?
-period_strings_14qubit = list()
-
-#2 -bit strings
-period_strings_14qubit.append(s0)
-period_strings_14qubit.append(s1)
-period_strings_14qubit.append(s2)
-period_strings_14qubit.append(s3)
+# 2-bit strings
+period_strings_2bit = create_period_str(2)
 
 # 3-bit strings
-period_strings_14qubit.append(s4)
-period_strings_14qubit.append(s5)
-period_strings_14qubit.append(s6)
-period_strings_14qubit.append(s7)
-period_strings_14qubit.append(s8)
-period_strings_14qubit.append(s9)
-period_strings_14qubit.append(s10)
-period_strings_14qubit.append(s11)
+period_strings_3bit = create_period_str(3)
 
 # 4-bit strings
-period_strings_14qubit.append(s12)
-period_strings_14qubit.append(s13)
-period_strings_14qubit.append(s14)
-period_strings_14qubit.append(s15)
-period_strings_14qubit.append(s16)
-period_strings_14qubit.append(s17)
-period_strings_14qubit.append(s18)
-period_strings_14qubit.append(s19)
-period_strings_14qubit.append(s20)
-period_strings_14qubit.append(s21)
-period_strings_14qubit.append(s22)
-period_strings_14qubit.append(s23)
-period_strings_14qubit.append(s24)
-period_strings_14qubit.append(s25)
-period_strings_14qubit.append(s26)
-period_strings_14qubit.append(s27)
+period_strings_4bit = create_period_str(4)
 
 # 5-bit strings
+period_strings_5bit = create_period_str(5)
 
-period_strings_14qubit.append(s28)
-period_strings_14qubit.append(s29)
-period_strings_14qubit.append(s30)
-period_strings_14qubit.append(s31)
-period_strings_14qubit.append(s32)
-period_strings_14qubit.append(s33)
-period_strings_14qubit.append(s34)
-period_strings_14qubit.append(s35)
-period_strings_14qubit.append(s36)
-period_strings_14qubit.append(s37)
-period_strings_14qubit.append(s38)
-period_strings_14qubit.append(s39)
-period_strings_14qubit.append(s40)
-period_strings_14qubit.append(s41)
-period_strings_14qubit.append(s42)
-period_strings_14qubit.append(s43)
-
-#6-bit strings
-
-period_strings_14qubit.append(s44)
-period_strings_14qubit.append(s45)
-period_strings_14qubit.append(s46)
-period_strings_14qubit.append(s47)
-period_strings_14qubit.append(s48)
-period_strings_14qubit.append(s49)
-period_strings_14qubit.append(s50)
-period_strings_14qubit.append(s51)
-period_strings_14qubit.append(s52)
-period_strings_14qubit.append(s53)
-period_strings_14qubit.append(s54)
-period_strings_14qubit.append(s55)
-period_strings_14qubit.append(s56)
-period_strings_14qubit.append(s57)
-period_strings_14qubit.append(s58)
-period_strings_14qubit.append(s59)
-period_strings_14qubit.append(s60)
-period_strings_14qubit.append(s61)
-period_strings_14qubit.append(s62)
-period_strings_14qubit.append(s63)
-period_strings_14qubit.append(s64)
-period_strings_14qubit.append(s65)
-period_strings_14qubit.append(s66)
-period_strings_14qubit.append(s67)
-period_strings_14qubit.append(s68)
-period_strings_14qubit.append(s69)
-period_strings_14qubit.append(s70)
-period_strings_14qubit.append(s71)
-period_strings_14qubit.append(s72)
-period_strings_14qubit.append(s73)
-period_strings_14qubit.append(s74)
-period_strings_14qubit.append(s75)
+# 6-bit strings
+period_strings_6bit = create_period_str(6)
 
 # 7-bit strings
-
-period_strings_14qubit.append(s76)
-period_strings_14qubit.append(s77)
-period_strings_14qubit.append(s78)
-period_strings_14qubit.append(s79)
-period_strings_14qubit.append(s80)
-period_strings_14qubit.append(s81)
-period_strings_14qubit.append(s82)
-period_strings_14qubit.append(s83)
-period_strings_14qubit.append(s84)
-period_strings_14qubit.append(s85)
-period_strings_14qubit.append(s86)
-period_strings_14qubit.append(s87)
-period_strings_14qubit.append(s88)
-period_strings_14qubit.append(s89)
-period_strings_14qubit.append(s90)
-period_strings_14qubit.append(s91)
-period_strings_14qubit.append(s92)
-period_strings_14qubit.append(s93)
-period_strings_14qubit.append(s94)
-period_strings_14qubit.append(s95)
-period_strings_14qubit.append(s96)
-period_strings_14qubit.append(s97)
-period_strings_14qubit.append(s98)
-period_strings_14qubit.append(s99)
-period_strings_14qubit.append(s100)
-period_strings_14qubit.append(s101)
-period_strings_14qubit.append(s102)
-period_strings_14qubit.append(s103)
-period_strings_14qubit.append(s104)
-period_strings_14qubit.append(s105)
-period_strings_14qubit.append(s106)
-period_strings_14qubit.append(s107)
-period_strings_14qubit.append(s108)
-period_strings_14qubit.append(s109)
-period_strings_14qubit.append(s110)
-period_strings_14qubit.append(s111)
-period_strings_14qubit.append(s112)
-period_strings_14qubit.append(s113)
-period_strings_14qubit.append(s114)
-period_strings_14qubit.append(s115)
-period_strings_14qubit.append(s116)
-period_strings_14qubit.append(s117)
-period_strings_14qubit.append(s118)
-period_strings_14qubit.append(s119)
-period_strings_14qubit.append(s120)
-period_strings_14qubit.append(s121)
-period_strings_14qubit.append(s122)
-period_strings_14qubit.append(s123)
-period_strings_14qubit.append(s124)
-period_strings_14qubit.append(s125)
-period_strings_14qubit.append(s126)
-period_strings_14qubit.append(s127)
-period_strings_14qubit.append(s128)
-period_strings_14qubit.append(s129)
-period_strings_14qubit.append(s130)
-period_strings_14qubit.append(s131)
-period_strings_14qubit.append(s132)
-period_strings_14qubit.append(s133)
-period_strings_14qubit.append(s134)
-period_strings_14qubit.append(s135)
-period_strings_14qubit.append(s136)
-period_strings_14qubit.append(s137)
-period_strings_14qubit.append(s138)
-
+period_strings_7bit = create_period_str(7)
 
 # IBM Q stuff..
 IBMQ.load_account()
@@ -570,7 +289,6 @@ backend_list['melbourne'] = melbourne
 
 # Least busy backend, for individual testing
 #backend_list[least_name] = least
-
 
 
 # Make Circuits for all period strings!
@@ -624,7 +342,7 @@ print("\n===== SENDING DATA TO IBMQ BACKENDS... =====\n")
 ranJobs = list() 
 
 jcount = 1
-jtotal = 139
+jtotal = 500
 for name in backend_list:
 	for circuit in circuitList:
 		job = execute(circuit,backend=backend_list[name], shots=1024)
