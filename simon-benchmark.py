@@ -67,6 +67,8 @@ def blackbox(period_string):
 						i += 1
 						
 		# Randomly flip qubit
+		# Seed random numbers for predictability / benchmark
+		np.random.seed(0)
 		for i in range(n):
 				if np.random.random() > 0.5:
 						simonCircuit.x(qr[n+i])
