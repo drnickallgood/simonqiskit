@@ -28,10 +28,12 @@ class QJob:
         return self.job
 
     def setCorrect(self, value):
-        self.correct += value
+        #self.correct += value
+        self.correct = value
 
     def setIncorrect(self, value):
-        self.incorrect += value
+        #self.incorrect += value
+        self.incorrect = value
         #self.correct = self.total - self.incorrect
 
     def getCorrect(self):

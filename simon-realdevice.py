@@ -122,13 +122,10 @@ qprovider = IBMQ.get_provider(hub='ibm-q')
 
 #qprovider.backends()
 # Get the least busy backend
-qbackend = least_busy(qprovider.backends(filters=lambda x: x.configuration().n_qubits == 5 and not x.configuration().simulator and x.status().operational==True))
+#qbackend = least_busy(qprovider.backends(filters=lambda x: x.configuration().n_qubits == 5 and not x.configuration().simulator and x.status().operational==True))
 
+qbackend = local_sim
 backend_name = qbackend.name()
-
-print(backend_name)
-
-#qbackend = local_sim
 #print("least busy backend: ", qbackend)
 
 #qbackend = qprovider.get_backend('ibmq_vigo')

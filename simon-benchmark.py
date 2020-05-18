@@ -163,11 +163,14 @@ def print_list(results):
 
 
 ## easily create period strings
+## We want to avoid using anything with all 0's as that gives us false results
+## because anything mod2 00 will give results
 def create_period_str(strlen):
     str_list = list()
     for i in itertools.product([0,1],repeat=strlen):
-        #print("".join(map(str,i)))
-        str_list.append("".join(map(str,i)))
+        if "1" in ("".join(map(str,i))):
+            #print("".join(map(str,i)))
+            str_list.append("".join(map(str,i)))
 
     return str_list
 
@@ -257,13 +260,12 @@ burlington = provider.get_backend('ibmq_burlington')
 ourense = provider.get_backend('ibmq_ourense')
 vigo = provider.get_backend('ibmq_vigo')
 
-#least = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits == 5 and not x.configuration().simulator and x.status().operational==True))
+least = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits == 5 and not x.configuration().simulator and x.status().operational==True))
 
 #Nam comes back as ibmq_backend, get the part after ibmq
 #least_name = least.name().split('_')[1]
 
 #print("Least busy backend: " + least_name)
-
 
 # 32 qubit qasm simulator - IBMQ
 ibmq_sim = provider.get_backend('ibmq_qasm_simulator')
@@ -287,16 +289,31 @@ backend_list['vigo'] = vigo
 #backend14q_list['melbourne'] = melbourne
 
 
+## DO NOT USE ITERATION FORMULA JUST HERE FOR REF
+# Iterations = # of backends tested
 # iteration formula = floor(log2(num_backends * num_shots)) = 14 here
 # 2-bit period strings
 ranJobs = list()
-backname = "vigo"
+backname = "local_sim"
+#iterations = 14
+#iterations = 7 
+iterations = 1 
+# Each period string = 1024 shots * 14 iterations
+#o Jobs total = # of strings * iterations
+total_jobs = iterations * 3
+job_start_idx = 1
+
+print("\n=== SENDING DATA TO IBMQ BACKEND:" + least.name() + " ===\n")
+# Idea here is we have are feeding hidden bitstrings and getting back results from the QC
 for period in period_strings_2bit:
+    print(str(period))
     n = len(period)
     # Seed random number
     print("=== Creating Circuit ===")
+
+    # This allows us to get consistent random functions generated for f(x)
     np.random.seed(0)
-    for k in range(14):
+    for k in range(iterations):
         # Generate circuit
         qr = QuantumRegister(2*n)
         cr = ClassicalRegister(n)
@@ -314,11 +331,15 @@ for period in period_strings_2bit:
             simonCircuit.h(qr[i])
              
         simonCircuit.barrier()
-           # Measure qubits, maybe change to just first qubit to measure
+        # Measure qubits, maybe change to just first qubit to measure
         simonCircuit.measure(qr[0:n],cr)
+        #print(simonCircuit)
+
         # run circuit
-        print("\n=== SENDING DATA TO IBMQ BACKEND ===\n")
-        job = execute(simonCircuit,backend=vigo, shots=1024)
+        print("Job: " + str(job_start_idx) + "/" + str(total_jobs))
+        #job = execute(simonCircuit,backend=least, shots=1024)
+        job = execute(simonCircuit,backend=local_sim, shots=1024)
+        job_start_idx += 1
         job_monitor(job,interval=3)
         # Store result, including period string
         qj = QJob(job,simonCircuit,backname, period)
@@ -330,16 +351,19 @@ for qjob in ranJobs:
     counts = results.get_counts()
     equations = guass_elim(results)
     # Get period string
-    pstr = getPeriod()
+    pstr = qjob.getPeriod()
 
-    obsv_str = list()
+    obsv_strs = list()
     str_cnt = 0
 
     sorted_str = sorted(results.get_counts().items(), key=operator.itemgetter(1), reverse=True)
 
+    print("==== RAW RESULTS ====")
+    print(qjob.getPeriod())
+    print(counts)
     # Get just the observed strings
     for string in sorted_str:
-        obsv_str.append(string[0])
+        obsv_strs.append(string[0])
 
         # go through and verify strings
         for o in obsv_strs:
@@ -348,6 +372,8 @@ for qjob in ranJobs:
                 for string, count in counts.items():
                     if string == o:
                         #print("===== SET CORRECT =====")
+                        print("Correct String: " + string)
+                        #print("Correct String Counts: " + str(count))
                         qjob.setCorrect(count)        
                     else:
                         # lookup counts based on string
@@ -356,10 +382,33 @@ for qjob in ranJobs:
                             if string == o:
                                 # Add value to incorrect holder in object
                                 #print("===== SET INCORRECT =====")
+                                print("Incorrect String: " + string)
+                                #print("Incorrect String Counts: " + str(count))
                                 qjob.setIncorrect(count)
+            # Increment total strings
+            str_cnt += 1
+        #print("Total String Count:" + str(str_cnt))
 
+total_correct = 0
+total_incorrect = 0
+total_runs = 0
+# Each period string = 1024 shots * iterations 
+# 2 bit string = 1024 * 3 = 3072 shots
+# iterations = random function generated
+
+for qjob in ranJobs:
+    total_correct += qjob.getCorrect()
+    total_incorrect += qjob.getIncorrect() 
+
+total_runs = total_correct + total_incorrect
+
+print("Total Runs: " + str(total_runs))
+print("Total Correct: " + str(total_correct))
+print("Total Incorrect: " + str(total_incorrect))
 
 exit(1)
+
+
 # Least busy backend, for individual testing
 #backend_list[least_name] = least
 
