@@ -1,0 +1,6 @@
+Total Runs: 21504
+Total Correct: 14697
+Total Incorrect: 6807
+
+Prob Correct: 0.6834542410714286
+Prob Incorrect: 0.31654575892857145
