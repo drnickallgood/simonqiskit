@@ -296,11 +296,11 @@ backend_list['vigo'] = vigo
 ranJobs = list()
 backname = "local_sim"
 #iterations = 14
-#iterations = 7 
-iterations = 1 
+iterations = 7 
+#iterations = 1 
 # Each period string = 1024 shots * 14 iterations
 #o Jobs total = # of strings * iterations
-total_jobs = iterations * 3
+total_jobs = iterations * len(period_strings_2bit)
 job_start_idx = 1
 
 print("\n=== SENDING DATA TO IBMQ BACKEND:" + least.name() + " ===\n")
@@ -337,8 +337,8 @@ for period in period_strings_2bit:
 
         # run circuit
         print("Job: " + str(job_start_idx) + "/" + str(total_jobs))
-        #job = execute(simonCircuit,backend=least, shots=1024)
-        job = execute(simonCircuit,backend=local_sim, shots=1024)
+        job = execute(simonCircuit,backend=least, shots=1024)
+        #job = execute(simonCircuit,backend=local_sim, shots=1024)
         job_start_idx += 1
         job_monitor(job,interval=3)
         # Store result, including period string
@@ -359,48 +359,48 @@ for qjob in ranJobs:
     sorted_str = sorted(results.get_counts().items(), key=operator.itemgetter(1), reverse=True)
 
     print("==== RAW RESULTS ====")
-    print(qjob.getPeriod())
+    print("Period String:" + qjob.getPeriod())
     print(counts)
+
     # Get just the observed strings
     for string in sorted_str:
         obsv_strs.append(string[0])
 
-        # go through and verify strings
-        for o in obsv_strs:
-             # Remember to re-reverse string so it's back to normal due to IBMQ Endianness
-            if verify_string(o,pstr):
-                for string, count in counts.items():
-                    if string == o:
-                        #print("===== SET CORRECT =====")
-                        print("Correct String: " + string)
-                        #print("Correct String Counts: " + str(count))
-                        qjob.setCorrect(count)        
-                    else:
-                        # lookup counts based on string
-                        # counts is a dict()
-                        for string, count in counts.items():
-                            if string == o:
-                                # Add value to incorrect holder in object
-                                #print("===== SET INCORRECT =====")
-                                print("Incorrect String: " + string)
-                                #print("Incorrect String Counts: " + str(count))
-                                qjob.setIncorrect(count)
-            # Increment total strings
-            str_cnt += 1
-        #print("Total String Count:" + str(str_cnt))
+    # go through and verify strings
+    for o in obsv_strs:
+        # Remember to re-reverse string so it's back to normal due to IBMQ Endianness
+        if verify_string(o,pstr):
+            # Goes through strings and counts 
+            for string, count in counts.items():
+                if string == o:
+                    #print("===== SET CORRECT =====")
+                    print("Correct String: " + string)
+                    #print("Correct String Counts: " + str(count))
+                    qjob.setCorrect(count)        
+        else:
+            # lookup counts based on string
+            # counts is a dict()
+            for string, count in counts.items():
+                if string == o:
+                    # Add value to incorrect holder in object
+                    #print("===== SET INCORRECT =====")
+                    print("Incorrect String: " + string)
+                    #print("Incorrect String Counts: " + str(count))
+                    qjob.setIncorrect(count)
 
 total_correct = 0
 total_incorrect = 0
-total_runs = 0
-# Each period string = 1024 shots * iterations 
-# 2 bit string = 1024 * 3 = 3072 shots
+
+total_runs = (1024 * iterations) * len(period_strings_2bit)
+ 
+# Each period string = 1024 shots * iterations/# random functions 
+# 2-bit string = 1024 * rand_function  - each string
+# For all 2-bit strings,  (1024*rand_functions) * num_strings
 # iterations = random function generated
 
 for qjob in ranJobs:
     total_correct += qjob.getCorrect()
     total_incorrect += qjob.getIncorrect() 
-
-total_runs = total_correct + total_incorrect
 
 print("Total Runs: " + str(total_runs))
 print("Total Correct: " + str(total_correct))
