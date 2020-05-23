@@ -298,14 +298,13 @@ backname = "local_sim"
 #iterations = 14
 iterations = 7 
 #iterations = 1 
-# Each period string = 1024 shots * 14 iterations
 #o Jobs total = # of strings * iterations
-total_jobs = iterations * len(period_strings_2bit)
+total_jobs = iterations * len(period_strings_7bit)
 job_start_idx = 1
 
-print("\n=== SENDING DATA TO IBMQ BACKEND:" + least.name() + " ===\n")
+print("\n=== SENDING DATA TO IBMQ BACKEND:" + melbourne.name() + " ===\n")
 # Idea here is we have are feeding hidden bitstrings and getting back results from the QC
-for period in period_strings_2bit:
+for period in period_strings_7bit:
     print(str(period))
     n = len(period)
     # Seed random number
@@ -337,7 +336,7 @@ for period in period_strings_2bit:
 
         # run circuit
         print("Job: " + str(job_start_idx) + "/" + str(total_jobs))
-        job = execute(simonCircuit,backend=least, shots=1024)
+        job = execute(simonCircuit,backend=melbourne, shots=1024)
         #job = execute(simonCircuit,backend=local_sim, shots=1024)
         job_start_idx += 1
         job_monitor(job,interval=3)
@@ -391,7 +390,7 @@ for qjob in ranJobs:
 total_correct = 0
 total_incorrect = 0
 
-total_runs = (1024 * iterations) * len(period_strings_2bit)
+total_runs = (1024 * iterations) * len(period_strings_7bit)
  
 # Each period string = 1024 shots * iterations/# random functions 
 # 2-bit string = 1024 * rand_function  - each string
