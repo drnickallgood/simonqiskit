@@ -1,0 +1,429 @@
+
+===== SENDING DATA TO IBMQ BACKENDS... =====
+
+Running job on backend: melbourne
+Running job:  1/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  2/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  3/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  4/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  5/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  6/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  7/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  8/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  9/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  10/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  11/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  12/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  13/139
+Job Status: job is being validatedJob Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  14/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  15/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  16/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  17/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  18/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  19/139
+Job Status: job is being validatedJob Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  20/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  21/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  22/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  23/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  24/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  25/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  26/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  27/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  28/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  29/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  30/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  31/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  32/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  33/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  34/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  35/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  36/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  37/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  38/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  39/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  40/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  41/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  42/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  43/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  44/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  45/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  46/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  47/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  48/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  49/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  50/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  51/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  52/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  53/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  54/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  55/139
+Job Status: job is being validatedJob Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  56/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  57/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  58/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  59/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  60/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  61/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  62/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  63/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  64/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  65/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  66/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  67/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  68/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  69/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  70/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  71/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  72/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  73/139
+Job Status: job is being validatedJob Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  74/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  75/139
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  76/139
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  77/139
+Job Status: job is being validatedJob Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  78/139
+Job Status: job is being validatedJob Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  79/139
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  80/139
+Job Status: job is being validatedJob Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  81/139
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  82/139
+Job Status: job is being validatedJob Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  83/139
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  84/139
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  85/139
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  86/139
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  87/139
+Job Status: job is being validatedJob Status: job is queued (10)    Job Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  88/139
+Job Status: job is being validatedJob Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  89/139
+Job Status: job is being validatedJob Status: job is queued (9)     Job Status: job is queued (8)     Job Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  90/139
+Job Status: job is being validatedJob Status: job is queued (7)     Job Status: job is queued (6)     Job Status: job is queued (5)     Job Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  91/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  92/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  93/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  94/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  95/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  96/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  97/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  98/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  99/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  100/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  101/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  102/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  103/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  104/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  105/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  106/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  107/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  108/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  109/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  110/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  111/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  112/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  113/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  114/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  115/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  116/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  117/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  118/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  119/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  120/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  121/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  122/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  123/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  124/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  125/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  126/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  127/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  128/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  129/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  130/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  131/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  132/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  133/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  134/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  135/139
+Job Status: job is being validatedJob Status: job is queued (4)     Job Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  136/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  137/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  138/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+Running job on backend: melbourne
+Running job:  139/139
+Job Status: job is being validatedJob Status: job is queued (3)     Job Status: job is queued (2)     Job Status: job is queued (1)     Job Status: job is actively runningJob Status: job has successfully run
+
+===== RESULTS - melbourne =====
+
+Total Results: 142336
+Total Correct Results: 73733 -- 51.80207396582733%
+Total Inorrect Results: 68603 -- 48.19792603417266%
+
+===================
+
