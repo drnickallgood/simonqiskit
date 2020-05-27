@@ -4,10 +4,10 @@ Simons Algorithm for Qiskit
 Adaptation of Simons Algorithm for IBM Qiskit / Q. This was taken from one of the original tutorials IBM had fo Qiskit that has since been removed. Original author Rudy Raymond
 
 
-**Total population of bitstrings (including all 0's)
+#### Total population of bitstrings (including all 0's)
 [(2^n)-1]*[(2^n)!]/[(2^(n-1))!]
 
-**Sample Size Formula 
+#### Sample Size Formula 
 s = n*x / (x + n - 1)
 x = ((1.96)*(1.96))*0.50*0.50 / (0.05)*0.05) = 385
 
