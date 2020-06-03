@@ -5,6 +5,7 @@ import operator
 import itertools
 #from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute, IBMQ
 from qiskit.providers.ibmq import least_busy
+from collections import OrderedDict
 
 # AER is for simulators
 from qiskit import Aer
@@ -107,8 +108,6 @@ def run_circuit(circuit,backend):
                    
         print("")
 '''
-
-        
 def guass_elim(results):
         # Classical post processing via Guassian elimination for the linear equations
         # Y a = 0
@@ -295,23 +294,30 @@ backend_list['vigo'] = vigo
 # 2-bit period strings
 ranJobs = list()
 backname = "local_sim"
-#iterations = 14
-iterations = 7 
-#iterations = 1 
+iterations = 12 
 #o Jobs total = # of strings * iterations
-total_jobs = iterations * len(period_strings_7bit)
+total_jobs = iterations * len(period_strings_2bit)
 job_start_idx = 1
 
-print("\n=== SENDING DATA TO IBMQ BACKEND:" + melbourne.name() + " ===\n")
+circs = list()
+
+print("\n=== SENDING DATA TO IBMQ BACKEND:" + vigo.name() + " ===\n")
 # Idea here is we have are feeding hidden bitstrings and getting back results from the QC
-for period in period_strings_7bit:
+for period in period_strings_2bit:
     print(str(period))
     n = len(period)
     # Seed random number
     print("=== Creating Circuit ===")
 
     # This allows us to get consistent random functions generated for f(x)
-    np.random.seed(0)
+    #np.random.seed(0) ## Returns 6 duplicates
+    #np.random.seed(1) ## returns 9 duplicates
+    #np.random.seed(2) ## returns 0 duplicates
+    #np.random.seed(3) ## returns 6 duplicates
+    #np.random.seed(4) ## returns 3 duplicates
+    #np.random.seed(50) ## returns 9 duplicates
+    #np.random.seed(555) ## returns 9 duplicates
+    #np.random.seed(23) ## returns 3 duplicates
     for k in range(iterations):
         # Generate circuit
         qr = QuantumRegister(2*n)
@@ -332,8 +338,32 @@ for period in period_strings_7bit:
         simonCircuit.barrier()
         # Measure qubits, maybe change to just first qubit to measure
         simonCircuit.measure(qr[0:n],cr)
+        circs.append(simonCircuit)
         #print(simonCircuit)
+    #### end iterations loop for debugging
 
+    # Check for duplicates
+    # We compare count_ops() to get the actual operations and order they're in
+    # count_ops returns OrderedDict
+    
+    k = 0
+    dup_count = 0
+    #print(len(circs))
+    while k < len(circs)-1:
+        if circs[k].count_ops() == circs[k+1].count_ops():
+            print("\n=== Duplicates Found! ===")
+            print("Index:" + str(k))
+            #print("Index:" + str(k+1))
+            dup_count = dup_count + 1
+            #print(circs[k].count_ops())
+            #print(circs[k+1].count_ops())
+            print("=== End Duplcates ===")
+            k = k+2
+        else:
+            k = k+1
+
+
+'''
         # run circuit
         print("Job: " + str(job_start_idx) + "/" + str(total_jobs))
         job = execute(simonCircuit,backend=melbourne, shots=1024)
@@ -343,7 +373,10 @@ for period in period_strings_7bit:
         # Store result, including period string
         qj = QJob(job,simonCircuit,backname, period)
         ranJobs.append(qj)
-
+'''
+print("Total Circuits:" + str(len(circs)))
+print("Total Duplicates:" + str(dup_count))
+exit(1)
 # Go through and get correct vs incorrect in jobs
 for qjob in ranJobs:
     results = qjob.job.result()
