@@ -1,4 +1,5 @@
 import sys
+import logging
 import matplotlib.pyplot as plt
 import numpy as np
 import operator
@@ -261,6 +262,20 @@ vigo = provider.get_backend('ibmq_vigo')
 
 least = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubits == 5 and not x.configuration().simulator and x.status().operational==True))
 
+# Setup logging
+# Will fail if file exists already -- because I'm lazy
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s',
+                    filename='results-2bit/' + melbourne.name() + '-2bit-36iter.txt',
+                    filemode='x')
+
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+console.setFormatter(formatter)
+logging.getLogger('').addHandler(console)
+
+
 #Nam comes back as ibmq_backend, get the part after ibmq
 #least_name = least.name().split('_')[1]
 
@@ -300,24 +315,26 @@ total_jobs = iterations * len(period_strings_2bit)
 job_start_idx = 1
 
 circs = list()
+dup_count = 0
 
-print("\n=== SENDING DATA TO IBMQ BACKEND:" + vigo.name() + " ===\n")
 # Idea here is we have are feeding hidden bitstrings and getting back results from the QC
+# Create circuits
 for period in period_strings_2bit:
-    print(str(period))
+    #print(str(period))
     n = len(period)
     # Seed random number
-    print("=== Creating Circuit ===")
+    #print("=== Creating Circuit ===")
+    logging.info("=== Creating Circuit: " + str(period) + " ===")
 
     # This allows us to get consistent random functions generated for f(x)
-    #np.random.seed(0) ## Returns 6 duplicates
-    #np.random.seed(1) ## returns 9 duplicates
-    #np.random.seed(2) ## returns 0 duplicates
-    #np.random.seed(3) ## returns 6 duplicates
-    #np.random.seed(4) ## returns 3 duplicates
-    #np.random.seed(50) ## returns 9 duplicates
-    #np.random.seed(555) ## returns 9 duplicates
-    #np.random.seed(23) ## returns 3 duplicates
+    #np.random.seed(0) ## Returns 12 duplicates
+    #np.random.seed(1) ## returns 18 duplicates
+    np.random.seed(2) ## returns 0 duplicates for 2bit stings, 36 iterations
+    #np.random.seed(3) ## returns 12 duplicates
+    #np.random.seed(4) ## returns 6 duplicates
+    #np.random.seed(50) ## returns 18 duplicates
+    #np.random.seed(555) ## returns 18 duplicates
+    np.random.seed(23) ## returns 3 duplicates
     for k in range(iterations):
         # Generate circuit
         qr = QuantumRegister(2*n)
@@ -339,15 +356,14 @@ for period in period_strings_2bit:
         # Measure qubits, maybe change to just first qubit to measure
         simonCircuit.measure(qr[0:n],cr)
         circs.append(simonCircuit)
-        #print(simonCircuit)
     #### end iterations loop for debugging
 
+'''
     # Check for duplicates
     # We compare count_ops() to get the actual operations and order they're in
     # count_ops returns OrderedDict
     
     k = 0
-    dup_count = 0
     #print(len(circs))
     while k < len(circs)-1:
         if circs[k].count_ops() == circs[k+1].count_ops():
@@ -362,21 +378,23 @@ for period in period_strings_2bit:
         else:
             k = k+1
 
-
-'''
-        # run circuit
-        print("Job: " + str(job_start_idx) + "/" + str(total_jobs))
-        job = execute(simonCircuit,backend=melbourne, shots=1024)
-        #job = execute(simonCircuit,backend=local_sim, shots=1024)
-        job_start_idx += 1
-        job_monitor(job,interval=3)
-        # Store result, including period string
-        qj = QJob(job,simonCircuit,backname, period)
-        ranJobs.append(qj)
-'''
 print("Total Circuits:" + str(len(circs)))
 print("Total Duplicates:" + str(dup_count))
-exit(1)
+'''
+
+# Run Circuits
+logging.info("\n=== Sending data to IBMQ Backend:" + melbourne.name() + " ===\n")
+for circ in circs:
+    #print("Job: " + str(job_start_idx) + "/" + str(total_jobs))
+    logging.info("Job: " + str(job_start_idx) + "/" + str(total_jobs))
+    job = execute(circ,backend=melbourne, shots=1024)
+    #job = execute(circ,backend=local_sim, shots=1024)
+    job_start_idx += 1
+    job_monitor(job,interval=3)
+    # Store result, including period string
+    qj = QJob(job,circ,melbourne.name(), period)
+    ranJobs.append(qj)
+
 # Go through and get correct vs incorrect in jobs
 for qjob in ranJobs:
     results = qjob.job.result()
@@ -390,9 +408,10 @@ for qjob in ranJobs:
 
     sorted_str = sorted(results.get_counts().items(), key=operator.itemgetter(1), reverse=True)
 
-    print("==== RAW RESULTS ====")
-    print("Period String:" + qjob.getPeriod())
-    print(counts)
+    #print("==== RAW RESULTS ====")
+    #logging.info("==== RAW RESULTS ====")
+    #logging.info("Period String:" + qjob.getPeriod())
+    #logging.info(counts)
 
     # Get just the observed strings
     for string in sorted_str:
@@ -406,7 +425,8 @@ for qjob in ranJobs:
             for string, count in counts.items():
                 if string == o:
                     #print("===== SET CORRECT =====")
-                    print("Correct String: " + string)
+                    #print("Correct String: " + string)
+                    #logging.info("Correct String: " + string)
                     #print("Correct String Counts: " + str(count))
                     qjob.setCorrect(count)        
         else:
@@ -416,27 +436,24 @@ for qjob in ranJobs:
                 if string == o:
                     # Add value to incorrect holder in object
                     #print("===== SET INCORRECT =====")
-                    print("Incorrect String: " + string)
+                    #print("Incorrect String: " + string)
+                    #logging.info("Incorrect String: " + string)
                     #print("Incorrect String Counts: " + str(count))
                     qjob.setIncorrect(count)
 
 total_correct = 0
 total_incorrect = 0
-
-total_runs = (1024 * iterations) * len(period_strings_7bit)
- 
-# Each period string = 1024 shots * iterations/# random functions 
-# 2-bit string = 1024 * rand_function  - each string
-# For all 2-bit strings,  (1024*rand_functions) * num_strings
-# iterations = random function generated
+total_runs = (1024 * iterations) * len(period_strings_2bit)
 
 for qjob in ranJobs:
     total_correct += qjob.getCorrect()
     total_incorrect += qjob.getIncorrect() 
 
-print("Total Runs: " + str(total_runs))
-print("Total Correct: " + str(total_correct))
-print("Total Incorrect: " + str(total_incorrect))
+logging.info("\n\nTotal Runs: " + str(total_runs))
+logging.info("Total Correct: " + str(total_correct))
+logging.info("Prob Correct: " + str(float(total_correct) / float(total_runs)))
+logging.info("Total Incorrect: " + str(total_incorrect))
+logging.info("Prob Incorrect: " + str(float(total_incorrect) / float(total_runs)))
 
 exit(1)
 
