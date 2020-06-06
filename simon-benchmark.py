@@ -309,6 +309,12 @@ backend_list['vigo'] = vigo
 # 2-bit period strings
 ranJobs = list()
 backname = "local_sim"
+#2bit = 12 = 36 random functions
+#3bit = 54 = 372+ random functions
+#4bit 
+#5bit 
+#6bit
+#7bit
 iterations = 12 
 #o Jobs total = # of strings * iterations
 total_jobs = iterations * len(period_strings_2bit)
@@ -327,14 +333,8 @@ for period in period_strings_2bit:
     logging.info("=== Creating Circuit: " + str(period) + " ===")
 
     # This allows us to get consistent random functions generated for f(x)
-    #np.random.seed(0) ## Returns 12 duplicates
-    #np.random.seed(1) ## returns 18 duplicates
     np.random.seed(2) ## returns 0 duplicates for 2bit stings, 36 iterations
-    #np.random.seed(3) ## returns 12 duplicates
-    #np.random.seed(4) ## returns 6 duplicates
-    #np.random.seed(50) ## returns 18 duplicates
-    #np.random.seed(555) ## returns 18 duplicates
-    np.random.seed(23) ## returns 3 duplicates
+
     for k in range(iterations):
         # Generate circuit
         qr = QuantumRegister(2*n)
@@ -359,28 +359,29 @@ for period in period_strings_2bit:
     #### end iterations loop for debugging
 
 '''
-    # Check for duplicates
-    # We compare count_ops() to get the actual operations and order they're in
-    # count_ops returns OrderedDict
+# Check for duplicates
+# We compare count_ops() to get the actual operations and order they're in
+# count_ops returns OrderedDict
     
-    k = 0
-    #print(len(circs))
-    while k < len(circs)-1:
-        if circs[k].count_ops() == circs[k+1].count_ops():
-            print("\n=== Duplicates Found! ===")
-            print("Index:" + str(k))
-            #print("Index:" + str(k+1))
-            dup_count = dup_count + 1
-            #print(circs[k].count_ops())
-            #print(circs[k+1].count_ops())
-            print("=== End Duplcates ===")
-            k = k+2
-        else:
-            k = k+1
+k = 0
+while k < len(circs)-1:
+    if circs[k].count_ops() == circs[k+1].count_ops():
+        print("\n=== Duplicates Found! ===")
+        print("Index:" + str(k))
+        #print("Index:" + str(k+1))
+        dup_count = dup_count + 1
+        #print(circs[k].count_ops())
+        #print(circs[k+1].count_ops())
+        print("=== End Duplcates ===")
+        k = k+2
+    else:
+        k = k+1
 
 print("Total Circuits:" + str(len(circs)))
 print("Total Duplicates:" + str(dup_count))
+exit(1)
 '''
+
 
 # Run Circuits
 logging.info("\n=== Sending data to IBMQ Backend:" + melbourne.name() + " ===\n")
