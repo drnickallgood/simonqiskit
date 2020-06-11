@@ -264,9 +264,10 @@ least = least_busy(provider.backends(filters=lambda x: x.configuration().n_qubit
 
 # Setup logging
 # Will fail if file exists already -- because I'm lazy
+'''
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s',
-                    filename='results-2bit/' + melbourne.name() + '-2bit-36iter.txt',
+                    filename='results-2-7bit/' + melbourne.name() + '-2bit-12iter.txt',
                     filemode='x')
 
 console = logging.StreamHandler()
@@ -274,7 +275,7 @@ console.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 console.setFormatter(formatter)
 logging.getLogger('').addHandler(console)
-
+'''
 
 #Nam comes back as ibmq_backend, get the part after ibmq
 #least_name = least.name().split('_')[1]
@@ -309,12 +310,12 @@ backend_list['vigo'] = vigo
 # 2-bit period strings
 ranJobs = list()
 backname = "local_sim"
-#2bit = 12 = 36 random functions
-#3bit = 54 = 372+ random functions
-#4bit 
-#5bit 
-#6bit
-#7bit
+#2bit = 12 = 36 random functions , min = 35
+#3bit = 54 = 37+ random functions, min = 372
+#4bit = 26 = 390, min = 384
+#5bit = 13 = 403, min = 385
+#6bit = 7 = 441, min = 385
+#7bit = 4 = 508, min = 385
 iterations = 12 
 #o Jobs total = # of strings * iterations
 total_jobs = iterations * len(period_strings_2bit)
@@ -329,11 +330,13 @@ for period in period_strings_2bit:
     #print(str(period))
     n = len(period)
     # Seed random number
-    #print("=== Creating Circuit ===")
-    logging.info("=== Creating Circuit: " + str(period) + " ===")
+    print("=== Creating Circuit ===")
+    #logging.info("=== Creating Circuit: " + str(period) + " ===")
 
     # This allows us to get consistent random functions generated for f(x)
     np.random.seed(2) ## returns 0 duplicates for 2bit stings, 36 iterations
+    #np.random.seed(384) ## returns 21 duplicates for 3bit stings, 54 iterations
+    #np.random.seed(227)
 
     for k in range(iterations):
         # Generate circuit
@@ -358,7 +361,6 @@ for period in period_strings_2bit:
         circs.append(simonCircuit)
     #### end iterations loop for debugging
 
-'''
 # Check for duplicates
 # We compare count_ops() to get the actual operations and order they're in
 # count_ops returns OrderedDict
@@ -366,21 +368,26 @@ for period in period_strings_2bit:
 k = 0
 while k < len(circs)-1:
     if circs[k].count_ops() == circs[k+1].count_ops():
-        print("\n=== Duplicates Found! ===")
-        print("Index:" + str(k))
+        #print("\n=== Duplicates Found! ===")
+        #print("Index:" + str(k))
         #print("Index:" + str(k+1))
         dup_count = dup_count + 1
         #print(circs[k].count_ops())
         #print(circs[k+1].count_ops())
-        print("=== End Duplcates ===")
+        #print("=== End Duplcates ===")
         k = k+2
     else:
         k = k+1
 
 print("Total Circuits:" + str(len(circs)))
+#logging.info("Total Circuits:" + str(len(circs)))
 print("Total Duplicates:" + str(dup_count))
+#logging.info("Total Duplicates:" + str(dup_count))
+for circ in circs:
+    print(circ)
+
 exit(1)
-'''
+
 
 
 # Run Circuits
@@ -455,6 +462,7 @@ logging.info("Total Correct: " + str(total_correct))
 logging.info("Prob Correct: " + str(float(total_correct) / float(total_runs)))
 logging.info("Total Incorrect: " + str(total_incorrect))
 logging.info("Prob Incorrect: " + str(float(total_incorrect) / float(total_runs)))
+logging.info("Total Duplicates:" + str(dup_count))
 
 exit(1)
 
