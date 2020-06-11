@@ -203,13 +203,6 @@ cr = ClassicalRegister(n, 'c')
 simonCircuit = QuantumCircuit(qr,cr)
 
 while done:
-    # Handle first string
-    #if not circs:
-    #simonCircuit = generate_simon(simonCircuit, period_strings_2bit[0])
-    #circs.append(simonCircuit)
-    #print(simonCircuit.count_ops())
-    #i = i + 1
-    #print("Period strings: " + str(i) + "/" + str(len(period_strings_2bit)))
     while i < len(period_strings_2bit):
         #print("Started main block..")
         #print(str(period_strings_2bit[i]))
