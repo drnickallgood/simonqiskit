@@ -270,13 +270,24 @@ while not_done:
         z = 0
     not_done = False
 
+dup_flag = False
+print("\nDouble checking heuristically...\n")
 # Double checking all items in list are not duplicate
-for x in range(len(uni_list)):
-    for y in range(len(uni_list)):
-        if np.array_equal(uni_list[x], uni_list[y]):
-            print("\nDuplicates in set, not valid\n")
-            exit(1)
+for x in range(0,len(uni_list)-1):
+    for y in range(1,len(uni_list)):
+        # Handle condition when x and y overlap and are eachother
+        if x != y:
+            if np.array_equal(uni_list[x], uni_list[y]):
+                print("Duplicates found at indexes:" + str(x) + "," + str(y))
+                dup_flag = True
+                #print("\nDuplicates in set, not valid\n")
 
-print(len(uni_list))
-    
+if dup_flag:
+    print("\nDuplicates Found, see above.\n")
+else:
+    print("\nNo duplicates found in 2nd pass\n")
+
+
+
+ 
 
