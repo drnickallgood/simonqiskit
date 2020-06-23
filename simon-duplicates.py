@@ -250,6 +250,7 @@ cr = ClassicalRegister(n, 'c')
 simonCircuit = QuantumCircuit(qr,cr)
 uni_list = list()
 iterations = 12 
+local_sim = Aer.get_backend('qasm_simulator')
 
 while not_done:
     while i < len(period_strings_2bit):
@@ -286,6 +287,25 @@ if dup_flag:
     print("\nDuplicates Found, see above.\n")
 else:
     print("\nNo duplicates found in 2nd pass\n")
+
+
+### Now to run on simulator ####
+iter_cnt = 0 
+pstr_cnt = 0 
+print("Period String: " + str(period_strings_2bit[pstr_cnt]))
+for circ in circs:
+    job = execute(circ, backend=local_sim, shots=1024)
+    result = job.result()    
+    counts = result.get_counts()
+    if iter_cnt == 12 or iter_cnt == 24:
+        pstr_cnt += 1
+        print("Period String: " + str(period_strings_2bit[pstr_cnt]))
+    iter_cnt += 1
+    
+    print(counts)
+
+print(len(circs))
+
 
 
 
