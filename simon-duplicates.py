@@ -30,8 +30,8 @@ def blackbox(simonCircuit, uni_list, period_string):
         # QP's don't care about this, we do#
         #############################
         
-        bbqr = QuantumRegister(2*n, 'q')
-        bbcr = ClassicalRegister(n, 'c') 
+        bbqr = QuantumRegister(2*n, 'bbq')
+        bbcr = ClassicalRegister(n, 'bbc') 
         bbcirc = QuantumCircuit(bbqr,bbcr)
         flag = True
 
