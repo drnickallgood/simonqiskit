@@ -24,10 +24,8 @@ from sympy import Matrix, pprint, MatrixSymbol, expand, mod_inverse
 from qjob import QJob
 
 unitary_sim = Aer.get_backend('unitary_simulator')
-uni_list = list()
-bbox_circs = list()
 
-def blackbox(simonCircuit, period_string):
+def blackbox(simonCircuit, uni_list, period_string):
         #### Blackbox Function #####
         # QP's don't care about this, we do#
         #############################
@@ -35,88 +33,98 @@ def blackbox(simonCircuit, period_string):
         bbqr = QuantumRegister(2*n, 'q')
         bbcr = ClassicalRegister(n, 'c') 
         bbcirc = QuantumCircuit(bbqr,bbcr)
+        flag = True
 
-        # Copy first register to second by using CNOT gates
-        for i in range(n):
-                #simonCircuit.cx(qr[i],qr[n+i])
-                bbcirc.cx(qr[i],qr[n+i])
+        while flag:
+            # Copy first register to second by using CNOT gates
+            for i in range(n):
+                    #simonCircuit.cx(qr[i],qr[n+i])
+                    bbcirc.cx(qr[i],qr[n+i])
                 
-        # get the small index j such it's "1"
-        j = -1
-        #reverse the string so that it takes
-        s = period_string[::-1]
-        for i, c in enumerate(s):
+            # get the small index j such it's "1"
+            j = -1
+            #reverse the string so that it takes
+            s = period_string[::-1]
+            for i, c in enumerate(s):
                 if c == "1":
-                        j = i
-                        break
+                    j = i
+                    break
                         
-        # 1-1 and 2-1 mapping with jth qubit 
-        # x is control to xor 2nd qubit with a
-        for i, c in enumerate(s):
+            # 1-1 and 2-1 mapping with jth qubit 
+            # x is control to xor 2nd qubit with a
+            for i, c in enumerate(s):
                 if c == "1" and j >= 0:
-                        #simonCircuit.x(qr[j])
-                        bbcirc.cx(qr[j], qr[n+i]) #the i-th qubit is flipped if s_i is 1
-                        #simonCircuit.x(qr[j])
+                    #simonCircuit.x(qr[j])
+                    bbcirc.cx(qr[j], qr[n+i]) #the i-th qubit is flipped if s_i is 1
+                    #simonCircuit.x(qr[j])
                         
-        # Random peemutation
-        # This part is how we can get by with 1 query of the oracle and better
-        # simulates quantum behavior we'd expect
-        perm = list(np.random.permutation(n))
+            # Random peemutation
+            # This part is how we can get by with 1 query of the oracle and better
+            # simulates quantum behavior we'd expect
+            perm = list(np.random.permutation(n))
 
-        # init position
-        init = list(range(n))
+            # init position
+            init = list(range(n))
 
-        i = 0
-        while i < n:
+            i = 0
+            while i < n:
                 if init[i] != perm[i]:
-                        k = perm.index(init[i])
-                        bbcirc.swap(qr[n+i],qr[n+k])    #swap gate on qubits
-                        init[i], init[k] = init[k], init[i] # mark the swapped qubits
+                    k = perm.index(init[i])
+                    bbcirc.swap(qr[n+i],qr[n+k])    #swap gate on qubits
+                    init[i], init[k] = init[k], init[i] # mark the swapped qubits
                 else:
-                        i += 1
+                    i += 1
                         
-        # Randomly flip qubit
-        # Seed random numbers for predictability / benchmark
-        for i in range(n):
+            # Randomly flip qubit
+            # Seed random numbers for predictability / benchmark
+            for i in range(n):
                 if np.random.random() > 0.5:
-                        bbcirc.x(qr[n+i])
+                    bbcirc.x(qr[n+i])
 
-        # Added for duplicate checking
-        # We get the unitary matrix of the blackbox generated circuit
-        bb_sim_result = execute(bbcirc, unitary_sim).result()
-        #bb_uni = bb_sim_result.get_unitary(bbcirc, decimals=15)
-        bb_uni = bb_sim_result.get_unitary(bbcirc)
+            # Added for duplicate checking
+            # We get the unitary matrix of the blackbox generated circuit
+            bb_sim_result = execute(bbcirc, unitary_sim).result()
+            bb_uni = bb_sim_result.get_unitary(bbcirc, decimals=15)
+            #bb_uni = bb_sim_result.get_unitary(bbcirc)
         
-        # Handle empty list
-        if len(uni_list) == 0:
-            uni_list.append(bb_uni)
-            #print("Added to list")
-        else:
-            # Check for duplicates
-            # If duplicate oracle query, re-run oracle 
-            #print("Checking for Duplicates...")
-            #print(np.array_equal(bb_uni, uni_list[0]))
-             
-            for i, uni in enumerate(uni_list):
-                if np.array_equal(bb_uni, uni):
-                #if bb_uni.all() == uni.all():
-                    print("Duplicate found, calling blackbox again")
-                    print(bbcirc)
-                    blackbox(simonCircuit, period_string)
-                    print("End blackbox again")
-                else:
-                    # No duplicate unitary matricies, we can add to list
-                    uni_list.append(bb_uni)
-                    #print("Added another to list")
+			# Duplicate flag
+            dup = False
 
+            # Handle empty list
+            if len(uni_list) == 0:
+                #uni_list.append(bb_uni)
+                # Set flag to false to break out of main loop
+                flag = False
+                dup = False 
+                print("adding first generated")
+            else:
+                # Check for duplicates
+                # If duplicate oracle query, re-run oracle 
+                #print(np.array_equal(bb_uni, uni_list[0]))
+                for i, uni in enumerate(uni_list):
+                    if np.array_equal(bb_uni, uni):
+					# Break out of for loop because we founhd a duplicate, re-run to get new blackbox circuit
+                        print("Duplicates Found, restarting loop")
+                        dup = True
+                        break    # breaks out of for loop to start over, 
+                    else:
+                        dup = False
+
+            # If duplicate flag not set after we searched the list...
+            if not dup:
+                # No duplicate unitary matricies, we can add to list
+				# and break out
+                uni_list.append(bb_uni)
+                flag = False
+                print("No Duplicates - Added another to list")
+
+		### End While
+        
         # Combine input circuit with created blackbox circuit 
-        
-        #print(simonCircuit)
-        #print(bbcirc)
         simonCircuit = simonCircuit + bbcirc
-        #print(simonCircuit)
         simonCircuit.barrier()
-       
+
+        print("Ending blackbox")
         
         return simonCircuit
         
@@ -185,10 +193,9 @@ backname = "local_sim"
 #5bit 
 #6bit
 #7bit
-iterations = 12 
 #o Jobs total = # of strings * iterations
-total_jobs = iterations * len(period_strings_5bit)
-job_start_idx = 1
+#total_jobs = iterations * len(period_strings_5bit)
+#job_start_idx = 1
 
 circs = list()
 
@@ -211,7 +218,7 @@ def find_duplicates(circs):
     return dup_count
             
 
-def generate_simon(simonCircuit, period):
+def generate_simon(simonCircuit, uni_list, period):
     # Generate circuit
 	# Assumes global simoncircuit
 
@@ -221,7 +228,7 @@ def generate_simon(simonCircuit, period):
         
     simonCircuit.barrier()
     # Oracle query
-    simonCircuit = blackbox(simonCircuit, period)
+    simonCircuit = blackbox(simonCircuit, uni_list, period)
     # Apply hadamards again
     for i in range(n):
         simonCircuit.h(qr[i])
@@ -235,30 +242,34 @@ def generate_simon(simonCircuit, period):
 i = 0  
 z = 0
 not_done = True
-np.random.seed(1725)
+np.random.seed(0)
 
-n = len(period_strings_2bit[0])
+n = len(period_strings_5bit[0])
 qr = QuantumRegister(2*n, 'q')
 cr = ClassicalRegister(n, 'c')
 simonCircuit = QuantumCircuit(qr,cr)
+uni_list = list()
+iterations = 13 
 
 while not_done:
-    while i < len(period_strings_2bit):
+    while i < len(period_strings_5bit):
         #print("Started main block..")
-        #print(str(period_strings_2bit[i]))
-        n = len(period_strings_2bit[i])
-        print("Period strings: " + str(i+1) + "/" + str(len(period_strings_2bit)))
+        #print(str(period_strings_5bit[i]))
+        n = len(period_strings_5bit[i])
+        print("Period strings: " + str(i+1) + "/" + str(len(period_strings_5bit)))
         while z < iterations:
             qr = QuantumRegister(2*n, 'q')
             cr = ClassicalRegister(n, 'c')
             simonCircuit = QuantumCircuit(qr,cr)
             # Duplicates are checked in blackbox function
-            simon = generate_simon(simonCircuit, period_strings_2bit[i])
+            simon = generate_simon(simonCircuit, uni_list, period_strings_5bit[i])
             circs.append(simon)
             z = z + 1
             print("Iterations:" + str(z) + "/" + str(iterations))
         i = i + 1
         z = 0
     not_done = False
+
+print(len(uni_list))
     
 
