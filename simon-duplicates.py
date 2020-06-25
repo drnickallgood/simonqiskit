@@ -30,16 +30,20 @@ def blackbox(simonCircuit, uni_list, period_string):
         # QP's don't care about this, we do#
         #############################
         
-        bbqr = QuantumRegister(2*n, 'q')
-        bbcr = ClassicalRegister(n, 'c') 
-        bbcirc = QuantumCircuit(bbqr,bbcr)
+        #bbqr = QuantumRegister(2*n, 'q')
+        #bbcr = ClassicalRegister(n, 'c') 
+        #bbcirc = QuantumCircuit(bbqr,bbcr)
         flag = True
 
         while flag:
+            bbqr = QuantumRegister(2*n, 'q')
+            bbcr = ClassicalRegister(n, 'c') 
+            bbcirc = QuantumCircuit(bbqr,bbcr)
             # Copy first register to second by using CNOT gates
             for i in range(n):
                     #simonCircuit.cx(qr[i],qr[n+i])
-                    bbcirc.cx(qr[i],qr[n+i])
+                    #bbcirc.cx(qr[i],qr[n+i])
+                    bbcirc.cx(bbqr[i],bbqr[n+i])
                 
             # get the small index j such it's "1"
             j = -1
@@ -55,8 +59,16 @@ def blackbox(simonCircuit, uni_list, period_string):
             for i, c in enumerate(s):
                 if c == "1" and j >= 0:
                     #simonCircuit.x(qr[j])
-                    bbcirc.cx(qr[j], qr[n+i]) #the i-th qubit is flipped if s_i is 1
+                    bbcirc.cx(bbqr[j], bbqr[n+i]) #the i-th qubit is flipped if s_i is 1
                     #simonCircuit.x(qr[j])
+
+            # Added to expand function space so that we get enough random
+            # functions for statistical sampling
+            # Randomly add a CX gate
+
+            for i in range(n):
+                if np.random.random() > 0.5:
+                    bbcirc.cx(bbqr[i],bbqr[n+i])
                         
             # Random peemutation
             # This part is how we can get by with 1 query of the oracle and better
@@ -70,7 +82,7 @@ def blackbox(simonCircuit, uni_list, period_string):
             while i < n:
                 if init[i] != perm[i]:
                     k = perm.index(init[i])
-                    bbcirc.swap(qr[n+i],qr[n+k])    #swap gate on qubits
+                    bbcirc.swap(bbqr[n+i], bbqr[n+k])    #swap gate on qubits
                     init[i], init[k] = init[k], init[i] # mark the swapped qubits
                 else:
                     i += 1
@@ -79,13 +91,12 @@ def blackbox(simonCircuit, uni_list, period_string):
             # Seed random numbers for predictability / benchmark
             for i in range(n):
                 if np.random.random() > 0.5:
-                    bbcirc.x(qr[n+i])
+                    bbcirc.x(bbqr[n+i])
 
             # Added for duplicate checking
             # We get the unitary matrix of the blackbox generated circuit
             bb_sim_result = execute(bbcirc, unitary_sim).result()
             bb_uni = bb_sim_result.get_unitary(bbcirc, decimals=15)
-            #bb_uni = bb_sim_result.get_unitary(bbcirc)
         
 			# Duplicate flag
             dup = False
@@ -244,26 +255,31 @@ z = 0
 not_done = True
 np.random.seed(0)
 
-n = len(period_strings_2bit[0])
+n = len(period_strings_5bit[0])
 qr = QuantumRegister(2*n, 'q')
 cr = ClassicalRegister(n, 'c')
 simonCircuit = QuantumCircuit(qr,cr)
 uni_list = list()
-iterations = 12 
+#iterations = 12   #2-bit
+#iterations = 54   #3-bit
+#iterations = 26   #4-bit 
+iterations = 13    #5-bit
+#iterations = 7    #6-bit 
+#iterations = 4    #7-bit 
 local_sim = Aer.get_backend('qasm_simulator')
 
 while not_done:
-    while i < len(period_strings_2bit):
+    while i < len(period_strings_5bit):
         #print("Started main block..")
-        #print(str(period_strings_2bit[i]))
-        n = len(period_strings_2bit[i])
-        print("Period strings: " + str(i+1) + "/" + str(len(period_strings_2bit)))
+        #print(str(period_strings_5bit[i]))
+        n = len(period_strings_5bit[i])
+        print("Period strings: " + str(i+1) + "/" + str(len(period_strings_5bit)))
         while z < iterations:
             qr = QuantumRegister(2*n, 'q')
             cr = ClassicalRegister(n, 'c')
             simonCircuit = QuantumCircuit(qr,cr)
             # Duplicates are checked in blackbox function
-            simon = generate_simon(simonCircuit, uni_list, period_strings_2bit[i])
+            simon = generate_simon(simonCircuit, uni_list, period_strings_5bit[i])
             circs.append(simon)
             z = z + 1
             print("Iterations:" + str(z) + "/" + str(iterations))
@@ -289,6 +305,7 @@ else:
     print("\nNo duplicates found in 2nd pass\n")
 
 
+'''
 ### Now to run on simulator ####
 iter_cnt = 0 
 pstr_cnt = 0 
@@ -303,7 +320,7 @@ for circ in circs:
     iter_cnt += 1
     
     print(counts)
-
+'''
 print(len(circs))
 
 
