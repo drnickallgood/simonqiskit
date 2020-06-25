@@ -67,8 +67,9 @@ def blackbox(simonCircuit, uni_list, period_string):
             # Randomly add a CX gate
 
             for i in range(n):
-                if np.random.random() > 0.5:
-                    bbcirc.cx(bbqr[i],bbqr[n+i])
+                for j in range(i+1, n):
+                    if np.random.random() > 0.5:
+                        bbcirc.cx(bbqr[n+i],bbqr[n+j])
                         
             # Random peemutation
             # This part is how we can get by with 1 query of the oracle and better
@@ -255,31 +256,31 @@ z = 0
 not_done = True
 np.random.seed(0)
 
-n = len(period_strings_5bit[0])
+n = len(period_strings_2bit[0])
 qr = QuantumRegister(2*n, 'q')
 cr = ClassicalRegister(n, 'c')
 simonCircuit = QuantumCircuit(qr,cr)
 uni_list = list()
-#iterations = 12   #2-bit
+iterations = 12   #2-bit
 #iterations = 54   #3-bit
 #iterations = 26   #4-bit 
-iterations = 13    #5-bit
+#iterations = 13    #5-bit
 #iterations = 7    #6-bit 
 #iterations = 4    #7-bit 
 local_sim = Aer.get_backend('qasm_simulator')
 
 while not_done:
-    while i < len(period_strings_5bit):
+    while i < len(period_strings_2bit):
         #print("Started main block..")
-        #print(str(period_strings_5bit[i]))
-        n = len(period_strings_5bit[i])
-        print("Period strings: " + str(i+1) + "/" + str(len(period_strings_5bit)))
+        #print(str(period_strings_2bit[i]))
+        n = len(period_strings_2bit[i])
+        print("Period strings: " + str(i+1) + "/" + str(len(period_strings_2bit)))
         while z < iterations:
             qr = QuantumRegister(2*n, 'q')
             cr = ClassicalRegister(n, 'c')
             simonCircuit = QuantumCircuit(qr,cr)
             # Duplicates are checked in blackbox function
-            simon = generate_simon(simonCircuit, uni_list, period_strings_5bit[i])
+            simon = generate_simon(simonCircuit, uni_list, period_strings_2bit[i])
             circs.append(simon)
             z = z + 1
             print("Iterations:" + str(z) + "/" + str(iterations))
