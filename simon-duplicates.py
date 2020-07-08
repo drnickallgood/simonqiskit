@@ -114,7 +114,8 @@ def blackbox(simonCircuit, uni_list, period_string):
                 # If duplicate oracle query, re-run oracle 
                 #print(np.array_equal(bb_uni, uni_list[0]))
                 for i, uni in enumerate(uni_list):
-                    if np.array_equal(bb_uni, uni):
+                    if (bb_uni == uni).all():
+                    #if np.array_equal(bb_uni, uni):
 					# Break out of for loop because we founhd a duplicate, re-run to get new blackbox circuit
                         print("Duplicates Found, restarting loop")
                         dup = True
@@ -261,6 +262,8 @@ qr = QuantumRegister(2*n, 'q')
 cr = ClassicalRegister(n, 'c')
 simonCircuit = QuantumCircuit(qr,cr)
 uni_list = list()
+
+outfile = open("simulations-2bit-12iter.txt", "w")
 iterations = 12   #2-bit
 #iterations = 54   #3-bit
 #iterations = 26   #4-bit 
@@ -272,7 +275,7 @@ local_sim = Aer.get_backend('qasm_simulator')
 while not_done:
     while i < len(period_strings_2bit):
         #print("Started main block..")
-        #print(str(period_strings_2bit[i]))
+        #print(str(period_strings_6bit[i]))
         n = len(period_strings_2bit[i])
         print("Period strings: " + str(i+1) + "/" + str(len(period_strings_2bit)))
         while z < iterations:
@@ -306,23 +309,33 @@ else:
     print("\nNo duplicates found in 2nd pass\n")
 
 
-'''
+
 ### Now to run on simulator ####
 iter_cnt = 0 
 pstr_cnt = 0 
+print("=== Results ===")
+outfile.write("=== Results ===\n")
 print("Period String: " + str(period_strings_2bit[pstr_cnt]))
+outfile.write("Period String: " + str(period_strings_2bit[pstr_cnt]) + "\n")
 for circ in circs:
-    job = execute(circ, backend=local_sim, shots=1024)
+    job = execute(circ, backend=local_sim, shots=1024, optimization_level=3, seed_transpiler=0)
     result = job.result()    
     counts = result.get_counts()
-    if iter_cnt == 12 or iter_cnt == 24:
+    # We advance to next period string 
+    if iter_cnt == iterations:
         pstr_cnt += 1
-        print("Period String: " + str(period_strings_2bit[pstr_cnt]))
+        print("Period String: " + str(period_strings_2bit[pstr_cnt]) + "\n")
+        outfile.write("Period String: " + str(period_strings_2bit[pstr_cnt]) + "\n")
+        iter_cnt = 0
+    #else:
+    #    iter_cnt += 1
+    # Prints the actual data per period string
     iter_cnt += 1
-    
     print(counts)
-'''
-print(len(circs))
+    outfile.write(str(counts) + "\n")
+
+outfile.close()
+#print(len(circs))
 
 
 
