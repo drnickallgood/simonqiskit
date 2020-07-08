@@ -257,33 +257,33 @@ z = 0
 not_done = True
 np.random.seed(0)
 
-n = len(period_strings_2bit[0])
+n = len(period_strings_5bit[0])
 qr = QuantumRegister(2*n, 'q')
 cr = ClassicalRegister(n, 'c')
 simonCircuit = QuantumCircuit(qr,cr)
 uni_list = list()
 
-outfile = open("simulations-2bit-12iter.txt", "w")
-iterations = 12   #2-bit
+outfile = open("sim-results/simulations-5bit-13iter.txt", "w")
+#iterations = 12   #2-bit
 #iterations = 54   #3-bit
 #iterations = 26   #4-bit 
-#iterations = 13    #5-bit
+iterations = 13    #5-bit
 #iterations = 7    #6-bit 
 #iterations = 4    #7-bit 
 local_sim = Aer.get_backend('qasm_simulator')
 
 while not_done:
-    while i < len(period_strings_2bit):
+    while i < len(period_strings_5bit):
         #print("Started main block..")
         #print(str(period_strings_6bit[i]))
-        n = len(period_strings_2bit[i])
-        print("Period strings: " + str(i+1) + "/" + str(len(period_strings_2bit)))
+        n = len(period_strings_5bit[i])
+        print("Period strings: " + str(i+1) + "/" + str(len(period_strings_5bit)))
         while z < iterations:
             qr = QuantumRegister(2*n, 'q')
             cr = ClassicalRegister(n, 'c')
             simonCircuit = QuantumCircuit(qr,cr)
             # Duplicates are checked in blackbox function
-            simon = generate_simon(simonCircuit, uni_list, period_strings_2bit[i])
+            simon = generate_simon(simonCircuit, uni_list, period_strings_5bit[i])
             circs.append(simon)
             z = z + 1
             print("Iterations:" + str(z) + "/" + str(iterations))
@@ -315,8 +315,8 @@ iter_cnt = 0
 pstr_cnt = 0 
 print("=== Results ===")
 outfile.write("=== Results ===\n")
-print("Period String: " + str(period_strings_2bit[pstr_cnt]))
-outfile.write("Period String: " + str(period_strings_2bit[pstr_cnt]) + "\n")
+print("Period String: " + str(period_strings_5bit[pstr_cnt]))
+outfile.write("Period String: " + str(period_strings_5bit[pstr_cnt]) + "\n")
 for circ in circs:
     job = execute(circ, backend=local_sim, shots=1024, optimization_level=3, seed_transpiler=0)
     result = job.result()    
@@ -324,8 +324,8 @@ for circ in circs:
     # We advance to next period string 
     if iter_cnt == iterations:
         pstr_cnt += 1
-        print("Period String: " + str(period_strings_2bit[pstr_cnt]) + "\n")
-        outfile.write("Period String: " + str(period_strings_2bit[pstr_cnt]) + "\n")
+        print("Period String: " + str(period_strings_5bit[pstr_cnt]) + "\n")
+        outfile.write("Period String: " + str(period_strings_5bit[pstr_cnt]) + "\n")
         iter_cnt = 0
     #else:
     #    iter_cnt += 1
