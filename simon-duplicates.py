@@ -25,6 +25,44 @@ from qjob import QJob
 
 unitary_sim = Aer.get_backend('unitary_simulator')
 
+## function to get dot product of result string with the period string to verify, result should be 0
+#check the wikipedia for simons formula 
+# DOT PRODUCT IS MOD 2 !!!!
+# Result XOR ?? = 0   -- this is what we're looking for!
+
+# We have to verify the period string with the ouptput using mod_2 addition aka XOR
+# Simply xor the period string with the output string     
+# Simply xor the period string with the output string, result must be 0 or 0b0
+def verify_string(ostr, pstr):
+    """
+    Verify string with period string
+    Does dot product and then mod2 addition
+    """
+    temp_list = list()
+    # loop through outstring, make into numpy array
+    for o in ostr:
+        temp_list.append(int(o))
+    
+    ostr_arr = np.asarray(temp_list)
+    temp_list.clear()
+    
+    # loop through period string, make into numpy array
+   
+    for p in pstr:
+        temp_list.append(int(p))
+        
+    pstr_arr = np.asarray(temp_list)
+    
+    temp_list.clear()
+    
+    # Per Simosn, we do the dot product of the np arrays and then do mod 2
+    results = np.dot(ostr_arr, pstr_arr)
+    
+    if results % 2 == 0:
+        return True
+     
+    return False
+
 def blackbox(simonCircuit, uni_list, period_string):
         #### Blackbox Function #####
         # QP's don't care about this, we do#
@@ -257,33 +295,33 @@ z = 0
 not_done = True
 np.random.seed(0)
 
-n = len(period_strings_5bit[0])
+n = len(period_strings_2bit[0])
 qr = QuantumRegister(2*n, 'q')
 cr = ClassicalRegister(n, 'c')
 simonCircuit = QuantumCircuit(qr,cr)
 uni_list = list()
 
-outfile = open("sim-results/simulations-5bit-13iter.txt", "w")
-#iterations = 12   #2-bit
+outfile = open("sim-results/simulations-2bit-12iter.txt", "w")
+iterations = 12   #2-bit
 #iterations = 54   #3-bit
 #iterations = 26   #4-bit 
-iterations = 13    #5-bit
+#iterations = 13    #5-bit
 #iterations = 7    #6-bit 
 #iterations = 4    #7-bit 
 local_sim = Aer.get_backend('qasm_simulator')
 
 while not_done:
-    while i < len(period_strings_5bit):
+    while i < len(period_strings_2bit):
         #print("Started main block..")
         #print(str(period_strings_6bit[i]))
-        n = len(period_strings_5bit[i])
-        print("Period strings: " + str(i+1) + "/" + str(len(period_strings_5bit)))
+        n = len(period_strings_2bit[i])
+        print("Period strings: " + str(i+1) + "/" + str(len(period_strings_2bit)))
         while z < iterations:
             qr = QuantumRegister(2*n, 'q')
             cr = ClassicalRegister(n, 'c')
             simonCircuit = QuantumCircuit(qr,cr)
             # Duplicates are checked in blackbox function
-            simon = generate_simon(simonCircuit, uni_list, period_strings_5bit[i])
+            simon = generate_simon(simonCircuit, uni_list, period_strings_2bit[i])
             circs.append(simon)
             z = z + 1
             print("Iterations:" + str(z) + "/" + str(iterations))
@@ -308,37 +346,61 @@ if dup_flag:
 else:
     print("\nNo duplicates found in 2nd pass\n")
 
-
-
+print("\nRunning final check of dot product between period string and observed strings...")
 ### Now to run on simulator ####
 iter_cnt = 0 
 pstr_cnt = 0 
-print("=== Results ===")
-outfile.write("=== Results ===\n")
-print("Period String: " + str(period_strings_5bit[pstr_cnt]))
-outfile.write("Period String: " + str(period_strings_5bit[pstr_cnt]) + "\n")
+ranJobs = list()
+
 for circ in circs:
     job = execute(circ, backend=local_sim, shots=1024, optimization_level=3, seed_transpiler=0)
+    # create Qjob, store info 
+    qj = QJob(job, circ, "local_sim", period_strings_2bit[pstr_cnt])
+    ranJobs.append(qj)
     result = job.result()    
     counts = result.get_counts()
-    # We advance to next period string 
-    if iter_cnt == iterations:
+    # We advance to next period string when we iterate through all
+    # the circuits per period strings
+    if iter_cnt == iterations-1:
         pstr_cnt += 1
-        print("Period String: " + str(period_strings_5bit[pstr_cnt]) + "\n")
-        outfile.write("Period String: " + str(period_strings_5bit[pstr_cnt]) + "\n")
         iter_cnt = 0
-    #else:
-    #    iter_cnt += 1
-    # Prints the actual data per period string
-    iter_cnt += 1
-    print(counts)
-    outfile.write(str(counts) + "\n")
+    else:
+        iter_cnt += 1
+    
+   # outfile.write(str(counts) + "\n")
 
 outfile.close()
-#print(len(circs))
 
+# Go through and get correct vs incorrect in jobs
+## This will verify all the strings we get back are correct from the non
+# duplicate circuits
+for qjob in ranJobs:
+    results = qjob.job.result()
+    counts = results.get_counts()
+    #equations = guass_elim(results)
+    # Get period string
+    pstr = qjob.getPeriod()
 
+    # Verify observed string vs peroid string by doing dot product
+    for ostr, count in counts.items():
+        if verify_string(ostr, pstr):
+            qjob.setCorrect(count)
+        else:
+            qjob.setIncorrect(count)
+            
+total_correct = 0
+total_incorrect = 0
+total_runs = (1024 * iterations) * len(period_strings_2bit)
 
+for qjob in ranJobs:
+    total_correct += qjob.getCorrect()
+    total_incorrect += qjob.getIncorrect() 
 
- 
+print("\nTotal Runs: " + str(total_runs))
+print("Total Correct: " + str(total_correct))
+print("Prob Correct: " + str(float(total_correct) / float(total_runs)))
+print("Total Incorrect: " + str(total_incorrect))
+print("Prob Incorrect: " + str(float(total_incorrect) / float(total_runs)))
+print("")
+
 
