@@ -26,7 +26,7 @@ mpmath==1.1.0
 nest-asyncio==1.2.3
 networkx==2.4
 ntlm-auth==1.4.0
-numpy==1.18.1
+numpy==1.22.0
 packaging==20.1
 pandas==1.0.1
 ply==3.11
